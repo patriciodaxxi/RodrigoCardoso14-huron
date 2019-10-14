@@ -103,6 +103,30 @@
             <Form>Form1</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="Model\Model.pas"/>
+        <DCCReference Include="Model\Model.Cliente.pas"/>
+        <DCCReference Include="Model\Model.Produto.pas"/>
+        <DCCReference Include="Model\Model.PedidoVenda.pas"/>
+        <DCCReference Include="Model\Model.Item.pas"/>
+        <DCCReference Include="View\View.Template.pas">
+            <Form>TemplateView</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="View\View.TemplateList.pas">
+            <Form>TemplateListView</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Controller\Controller.pas"/>
+        <DCCReference Include="DAO\DAO.pas"/>
+        <DCCReference Include="Util\Util.View.pas"/>
+        <DCCReference Include="Util\Util.Enum.pas"/>
+        <DCCReference Include="DAO\DAO.Cliente.pas"/>
+        <DCCReference Include="DAO\DAO.Produto.pas"/>
+        <DCCReference Include="DAO\DAO.PedidoVenda.pas"/>
+        <DCCReference Include="Controller\Controller.Cliente.pas"/>
+        <DCCReference Include="Controller\Controller.Produto.pas"/>
+        <DCCReference Include="Controller\Controller.PedidoVenda.pas"/>
+        <DCCReference Include="Singleton\Singleton.Connection.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

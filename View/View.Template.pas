@@ -1,0 +1,24 @@
+unit View.Template;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs;
+
+type
+  TTemplateView = class(TForm)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  TemplateView: TTemplateView;
+
+implementation
+
+{$R *.dfm}
+
+end.
