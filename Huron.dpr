@@ -2,7 +2,7 @@ program Huron;
 
 uses
   Vcl.Forms,
-  View.Principal in 'View\View.Principal.pas' {Form1},
+  View.Principal in 'View\View.Principal.pas' {PrincipalView},
   Model in 'Model\Model.pas',
   Model.Cliente in 'Model\Model.Cliente.pas',
   Model.Produto in 'Model\Model.Produto.pas',
@@ -20,15 +20,17 @@ uses
   Controller.Cliente in 'Controller\Controller.Cliente.pas',
   Controller.Produto in 'Controller\Controller.Produto.pas',
   Controller.PedidoVenda in 'Controller\Controller.PedidoVenda.pas',
-  Singleton.Connection in 'Singleton\Singleton.Connection.pas';
+  Singleton.Connection in 'Singleton\Singleton.Connection.pas',
+  View.Cliente in 'View\View.Cliente.pas' {ClienteView},
+  View.ClienteList in 'View\View.ClienteList.pas' {TemplateListView1};
 
 {$R *.res}
 
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
-  Application.CreateForm(TForm1, Form1);
-  Application.CreateForm(TTemplateView, TemplateView);
-  Application.CreateForm(TTemplateListView, TemplateListView);
+  Application.CreateForm(TPrincipalView, PrincipalView);
+  Application.CreateForm(TClienteView, ClienteView);
+  Application.CreateForm(TTemplateListView1, TemplateListView1);
   Application.Run;
 end.

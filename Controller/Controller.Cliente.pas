@@ -6,7 +6,7 @@ uses
   Controller;
 
 type
-  TClienteController = class(Controller)
+  TClienteController = class(TController)
 
   end;
 

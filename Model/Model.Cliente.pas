@@ -52,32 +52,32 @@ end;
 
 procedure TCliente.SetCNPJ(const Value: string);
 begin
-  FCNPJ := Value;
+  FCNPJ := UpperCase(Value).Trim;
 end;
 
 procedure TCliente.SetEmail(const Value: string);
 begin
-  FEmail := Value;
+  FEmail := UpperCase(Value).Trim;
 end;
 
 procedure TCliente.SetEndereco(const Value: string);
 begin
-  FEndereco := Value;
+  FEndereco := UpperCase(Value).Trim;
 end;
 
 procedure TCliente.SetNomeFantasia(const Value: string);
 begin
-  FNomeFantasia := Value;
+  FNomeFantasia := UpperCase(Value).Trim;
 end;
 
 procedure TCliente.SetRazaoSocial(const Value: string);
 begin
-  FRazaoSocial := Value;
+  FRazaoSocial := UpperCase(Value).Trim;
 end;
 
 procedure TCliente.SetTelefone(const Value: string);
 begin
-  FTelefone := Value;
+  FTelefone := UpperCase(Value).Trim;
 end;
 
 function TCliente.ToStringModel: string;

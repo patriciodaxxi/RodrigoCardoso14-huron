@@ -179,7 +179,7 @@ begin
     FViewTemplate.PrepareView;
     if AOperacao in [oUpdate, oRead] then
     begin
-      FViewTemplate.Model := Controller.DAO.FindByID(DataSource.DataSet.FieldByName('ID').AsInteger);
+      FViewTemplate.Model := Controller.DAO.Find(DataSource.DataSet.FieldByName('ID').AsInteger);
       FViewTemplate.SetViewByModel(FViewTemplate.Model);
     end;
 
