@@ -33,6 +33,7 @@ inherited ProdutoView: TProdutoView
     TabOrder = 1
     Text = '0.00000'
     OnExit = EDTCustoExit
+    OnKeyPress = EDTCustoKeyPress
   end
   object EDTPrecoVenda: TLabeledEdit
     Left = 158
@@ -48,5 +49,6 @@ inherited ProdutoView: TProdutoView
     TabOrder = 2
     Text = '0.00000'
     OnExit = EDTPrecoVendaExit
+    OnKeyPress = EDTPrecoVendaKeyPress
   end
 end

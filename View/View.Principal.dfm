@@ -27,9 +27,9 @@ object PrincipalView: TPrincipalView
   object Button1: TButton
     Left = 192
     Top = 56
-    Width = 139
+    Width = 129
     Height = 97
-    Caption = 'Button1'
+    Caption = 'Produto'
     TabOrder = 1
     OnClick = Button1Click
   end
@@ -41,11 +41,11 @@ object PrincipalView: TPrincipalView
     Panels = <>
   end
   object BTNPedidoVenda: TButton
-    Left = 384
+    Left = 360
     Top = 56
-    Width = 233
-    Height = 121
-    Caption = 'BTNPedidoVenda'
+    Width = 129
+    Height = 97
+    Caption = 'Pedido de Venda'
     TabOrder = 3
     OnClick = BTNPedidoVendaClick
   end

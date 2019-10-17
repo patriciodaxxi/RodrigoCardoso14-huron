@@ -14,6 +14,8 @@ type
     EDTPrecoVenda: TLabeledEdit;
     procedure EDTPrecoVendaExit(Sender: TObject);
     procedure EDTCustoExit(Sender: TObject);
+    procedure EDTCustoKeyPress(Sender: TObject; var Key: Char);
+    procedure EDTPrecoVendaKeyPress(Sender: TObject; var Key: Char);
   private
   public
     procedure SetViewByModel(const AModel: TModel); override;
@@ -53,10 +55,22 @@ begin
   EDTCusto.Text := FormatFloat(FormatoFloat, StrToFloatDef(EDTCusto.Text, 0));
 end;
 
+procedure TProdutoView.EDTCustoKeyPress(Sender: TObject; var Key: Char);
+begin
+  inherited;
+  EditFloatKeyPress(Sender, Key);
+end;
+
 procedure TProdutoView.EDTPrecoVendaExit(Sender: TObject);
 begin
   inherited;
   EDTPrecoVenda.Text := FormatFloat(FormatoFloat, StrToFloatDef(EDTPrecoVenda.Text, 0));
+end;
+
+procedure TProdutoView.EDTPrecoVendaKeyPress(Sender: TObject; var Key: Char);
+begin
+  inherited;
+  EditFloatKeyPress(Sender, Key);
 end;
 
 procedure TProdutoView.SetModelByView;

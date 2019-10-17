@@ -164,12 +164,12 @@ end;
 
 function TDAO.GenerateID: Integer;
 var
-  LID: Boolean;
+  LIDValido: Boolean;
 begin
   repeat
     Result := GetNewID;
-    LID := CheckID(Result)
-  until (LID = False);
+    LIDValido := CheckID(Result)
+  until (LIDValido = False);
 end;
 
 function TDAO.GetNewID: Integer;

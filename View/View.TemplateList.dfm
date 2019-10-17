@@ -16,6 +16,8 @@ object TemplateListView: TTemplateListView
   WindowState = wsMaximized
   OnCreate = FormCreate
   OnDestroy = FormDestroy
+  OnKeyDown = FormKeyDown
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object PanelHeader: TPanel
@@ -100,6 +102,7 @@ object TemplateListView: TTemplateListView
     TitleFont.Name = 'Verdana'
     TitleFont.Style = []
     OnDrawColumnCell = DBGridDrawColumnCell
+    OnDblClick = DBGridDblClick
     OnKeyDown = DBGridKeyDown
     OnTitleClick = DBGridTitleClick
   end
@@ -111,6 +114,10 @@ object TemplateListView: TTemplateListView
     Panels = <
       item
         Text = 'RETURN - Tecle na tabela para visualizar os dados do registro'
+        Width = 50
+      end
+      item
+        Text = 'F9 - Executar Pesquisa'
         Width = 50
       end>
   end
@@ -173,7 +180,7 @@ object TemplateListView: TTemplateListView
     Left = 272
     Top = 144
     Bitmap = {
-      494C010105003400B00020002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010105003400B40020002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000800000004000000001002000000000000080
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

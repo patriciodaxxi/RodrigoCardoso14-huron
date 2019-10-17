@@ -4,11 +4,15 @@ interface
 
 uses
   Vcl.StdCtrls, FireDAC.Comp.Client, SysUtils, Singleton.Connection, VCL.Forms,
-  VCL.Controls, VCL.Mask, Windows, VCL.ComCtrls, Vcl.ExtCtrls;
+  VCL.Controls, VCL.Mask, Windows, VCL.ComCtrls, Vcl.ExtCtrls, Grids;
 
 type
   TFormEventHelper = class helper for TForm
     procedure ValidarDataMaskEditExit(Sender: TObject);
+  end;
+
+  TStringGridEventHelper = class helper for TStringGrid
+    function VerifyObject(ACol, ARow: Integer): Boolean;
   end;
 
 function ValidarEMail(AEMail: string): Boolean;
@@ -16,13 +20,13 @@ procedure LimparCampos(const AView: TForm);
 procedure HabilitarCampos(const AView: TForm; const AFlag: Boolean);
 function RemoverMascara(AText: string): string;
 procedure KeyUpperCase(var Key: Char);
+procedure EditFloatKeyPress(Sender: TObject; var Key: Char);
+
+//function Search(AForm)
 
 const FormatoFloat: string = '0.00000';
 
 implementation
-
-uses
-  Vcl.Grids;
 
 procedure HabilitarCampos(const AView: TForm; const AFlag: Boolean);
 var
@@ -161,6 +165,25 @@ begin
   begin
     Result := False;
   end;
+end;
+
+procedure EditFloatKeyPress(Sender: TObject; var Key: Char);
+begin
+  if CharInSet(Key, ['.', ',']) then
+    if Pos(FormatSettings.DecimalSeparator, TEdit(Sender).Text) > 0 then
+      Key := #0
+    else
+      Key := FormatSettings.DecimalSeparator;
+
+  if not (CharInSet(Key, ['0'..'9', '.', ',', #8])) then
+    Key := #0;
+end;
+
+{ TStringGridEventHelper }
+
+function TStringGridEventHelper.VerifyObject(ACol, ARow: Integer): Boolean;
+begin
+  Result := Assigned(Self.Objects[ACol, ARow]);
 end;
 
 end.

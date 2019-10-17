@@ -1,7 +1,5 @@
 inherited PedidoVendaListView: TPedidoVendaListView
   Caption = 'Pedidos de Venda'
-  ExplicitWidth = 1131
-  ExplicitHeight = 542
   PixelsPerInch = 96
   TextHeight = 13
   inherited DBGrid: TDBGrid
@@ -41,12 +39,72 @@ inherited PedidoVendaListView: TPedidoVendaListView
         Visible = False
       end>
   end
+  inherited PanelFilter: TPanel
+    object LBLID: TLabel [0]
+      Left = 13
+      Top = 7
+      Width = 19
+      Height = 13
+      Caption = 'ID:'
+    end
+    object LBLNomeFantasia: TLabel [1]
+      Left = 507
+      Top = 7
+      Width = 65
+      Height = 13
+      Caption = 'Valor Total:'
+    end
+    object LBLRazaoSocial: TLabel [2]
+      Left = 87
+      Top = 7
+      Width = 78
+      Height = 13
+      Caption = 'Raz'#227'o Social:'
+    end
+    inherited BTNPesquisar: TButton
+      TabOrder = 3
+    end
+    inherited BTNLimpar: TButton
+      TabOrder = 4
+    end
+    object EDTID: TEdit
+      Left = 13
+      Top = 23
+      Width = 66
+      Height = 21
+      CharCase = ecUpperCase
+      MaxLength = 9
+      NumbersOnly = True
+      TabOrder = 0
+    end
+    object EDTValorTotal: TEdit
+      Left = 507
+      Top = 23
+      Width = 151
+      Height = 21
+      Alignment = taRightJustify
+      CharCase = ecUpperCase
+      MaxLength = 100
+      TabOrder = 2
+      OnExit = EDTValorTotalExit
+      OnKeyPress = EDTValorTotalKeyPress
+    end
+    object EDTRazaoSocial: TEdit
+      Left = 87
+      Top = 23
+      Width = 414
+      Height = 21
+      CharCase = ecUpperCase
+      MaxLength = 100
+      TabOrder = 1
+    end
+  end
   inherited DataSource: TDataSource
     OnDataChange = DataSourceDataChange
   end
   inherited ImageList1: TImageList
     Bitmap = {
-      494C010105003400B40020002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010105003400B80020002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000800000004000000001002000000000000080
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

@@ -34,7 +34,7 @@ begin
   try
     with TPedidoVenda(Result), AFDQuery do
     begin
-      Cliente := TCliente(LClienteDAO.Find(FieldByName('ID').AsInteger));
+      Cliente := TCliente(LClienteDAO.Find(FieldByName('IDCliente').AsInteger));
       ValorTotal := FieldByName('ValorTotal').AsFloat;
     end;
   finally

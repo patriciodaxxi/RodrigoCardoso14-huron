@@ -40,7 +40,7 @@ begin
   try
     ClienteListView.ShowModal;
   finally
-    FreeAndnil(ClienteListView);
+    FreeAndNil(ClienteListView);
   end;
 end;
 
@@ -50,7 +50,7 @@ begin
   try
     PedidoVendaListView.ShowModal;
   finally
-    FreeAndnil(PedidoVendaListView);
+    FreeAndNil(PedidoVendaListView);
   end;
 end;
 
@@ -60,7 +60,7 @@ begin
   try
     ProdutoListView.ShowModal;
   finally
-    FreeAndnil(ProdutoListView);
+    FreeAndNil(ProdutoListView);
   end;
 end;
 

@@ -14,7 +14,6 @@ type
     property View: string read FView write SetView;
   end;
 
-
   TModel = class
   private
     FUpdatedAt: TDateTime;
@@ -39,6 +38,9 @@ type
 
 implementation
 
+uses
+  SysUtils;
+
 { TBaseModel }
 
 constructor TModel.Create;
@@ -48,7 +50,7 @@ end;
 
 destructor TModel.Destroy;
 begin
-
+  FreeAndNil(FDataBaseObject);
   inherited;
 end;
 
@@ -76,8 +78,6 @@ function TModel.Validate: Boolean;
 begin
   Result := True;
 end;
-
-{ TDataBaseObject }
 
 { TDataBaseObject }
 

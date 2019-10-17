@@ -34,7 +34,7 @@ begin
   DataBaseObject.Table := 'PedidoVenda';
   DataBaseObject.View := 'VWPedidoVenda';
   Cliente := TCliente.Create;
-  ListItem := TObjectList<TItem>.Create;
+  ListItem := TObjectList<TItem>.Create(False);
 end;
 
 destructor TPedidoVenda.Destroy;

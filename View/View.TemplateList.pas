@@ -43,17 +43,26 @@ type
     procedure MIAlterarClick(Sender: TObject);
     procedure MIExcluirClick(Sender: TObject);
     procedure MIVisualizarClick(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure DBGridDblClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+  protected
+    IDReturnSearch: Integer;
   private
     FViewTemplate: TTemplateView;
     FController: TController;
+    FModoViewList: TModoViewList;
     procedure SetViewTemplate(const Value: TTemplateView);
     procedure SetController(const Value: TController);
+    procedure SetModoViewList(const Value: TModoViewList);
   public
     procedure Visualizar;
     function CreateViewTemplate(AOperacao: TOperacao): TTemplateView; virtual; abstract;
     procedure CreateController; virtual; abstract;
     procedure ShowViewTemplate(AOperacao: TOperacao); virtual;
+    function Search(const ACondition: string): TModel; virtual;
 
+    property ModoViewList: TModoViewList read FModoViewList write SetModoViewList default mvlNormal;
     property ViewTemplate: TTemplateView read FViewTemplate write SetViewTemplate;
     property Controller: TController read FController write SetController;
   end;
@@ -114,6 +123,15 @@ begin
   CreateController;
 end;
 
+procedure TTemplateListView.DBGridDblClick(Sender: TObject);
+var
+  Shift: TShiftState;
+  LKey: Word;
+begin
+  LKey := VK_Return;
+  DBGrid.OnKeyDown(Sender, LKey, Shift);
+end;
+
 procedure TTemplateListView.DBGridDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
   if Odd(DataSource.DataSet.Recno) = False then
@@ -163,7 +181,13 @@ begin
 
   if Key = VK_RETURN then
   begin
-    Visualizar;
+    if ModoViewList = mvlNormal then
+      Visualizar
+    else
+    begin
+      IDReturnSearch := DataSource.DataSet.FieldByName('ID').AsInteger;
+      Close;
+    end;
   end;
 end;
 
@@ -186,9 +210,44 @@ begin
     FreeAndNil(FController);
 end;
 
+procedure TTemplateListView.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+begin
+  if Key = VK_F9 then
+  begin
+    BTNPesquisar.OnClick(nil);
+  end;
+end;
+
+procedure TTemplateListView.FormShow(Sender: TObject);
+begin
+  if ModoViewList = mvlSearch then
+  begin
+    Width := 500;
+    Height := 800;
+    WindowState := wsNormal;
+    BorderIcons := BorderIcons + [biSystemMenu] + [biMinimize] - [biMaximize];
+    if DBGrid.CanFocus then
+      DBGrid.SetFocus;
+  end
+  else
+  begin
+    WindowState := wsMaximized;
+  end;
+end;
+
+function TTemplateListView.Search(const ACondition: string): TModel;
+begin
+  Result := nil;
+end;
+
 procedure TTemplateListView.SetController(const Value: TController);
 begin
   FController := Value;
+end;
+
+procedure TTemplateListView.SetModoViewList(const Value: TModoViewList);
+begin
+  FModoViewList := Value;
 end;
 
 procedure TTemplateListView.SetViewTemplate(const Value: TTemplateView);
