@@ -23,7 +23,6 @@ type
   public
     constructor Create; override;
     destructor Destroy; override;
-    function ToStringModel: string; override;
     function Validate: Boolean; override;
 
     property RazaoSocial: string read FRazaoSocial write SetRazaoSocial;
@@ -79,11 +78,6 @@ end;
 procedure TCliente.SetTelefone(const Value: string);
 begin
   FTelefone := UpperCase(Value).Trim;
-end;
-
-function TCliente.ToStringModel: string;
-begin
-  Result := EmptyStr;
 end;
 
 function TCliente.Validate: Boolean;

@@ -19,7 +19,6 @@ type
   public
     constructor Create; override;
     destructor Destroy; override;
-    function ToStringModel: string; override;
     function Validate: Boolean; override;
 
     property Produto: TProduto read FProduto write SetProduto;
@@ -62,11 +61,6 @@ end;
 procedure TItem.SetValorVenda(const Value: Double);
 begin
   FValorVenda := Value;
-end;
-
-function TItem.ToStringModel: string;
-begin
-  Result := EmptyStr;
 end;
 
 function TItem.Validate: Boolean;

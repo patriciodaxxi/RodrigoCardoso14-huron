@@ -146,6 +146,14 @@
             <Form>ProdutoView</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="View\View.PedidoVendaList.pas">
+            <Form>PedidoVendaListView</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="View\View.PedidoVenda.pas">
+            <Form>PedidoVendaView</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

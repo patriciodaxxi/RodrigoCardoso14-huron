@@ -17,7 +17,6 @@ type
   public
     constructor Create; override;
     destructor Destroy; override;
-    function ToStringModel: string; override;
     function Validate: Boolean; override;
 
     property Cliente: TCliente read FCliente write SetCliente;
@@ -32,6 +31,8 @@ implementation
 constructor TPedidoVenda.Create;
 begin
   inherited;
+  DataBaseObject.Table := 'PedidoVenda';
+  DataBaseObject.View := 'VWPedidoVenda';
   Cliente := TCliente.Create;
   ListItem := TObjectList<TItem>.Create;
 end;
@@ -56,11 +57,6 @@ end;
 procedure TPedidoVenda.SetValorTotal(const Value: Double);
 begin
   FValorTotal := Value;
-end;
-
-function TPedidoVenda.ToStringModel: string;
-begin
-  Result := EmptyStr;
 end;
 
 function TPedidoVenda.Validate: Boolean;

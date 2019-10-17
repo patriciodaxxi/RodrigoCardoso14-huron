@@ -26,7 +26,9 @@ uses
   Vcl.Themes,
   Vcl.Styles,
   View.ProdutoList in 'View\View.ProdutoList.pas' {ProdutoListView},
-  View.Produto in 'View\View.Produto.pas' {ProdutoView};
+  View.Produto in 'View\View.Produto.pas' {ProdutoView},
+  View.PedidoVendaList in 'View\View.PedidoVendaList.pas' {PedidoVendaListView},
+  View.PedidoVenda in 'View\View.PedidoVenda.pas' {PedidoVendaView};
 
 {$R *.res}
 

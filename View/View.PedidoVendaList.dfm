@@ -1,179 +1,52 @@
-object TemplateListView: TTemplateListView
-  Left = 0
-  Top = 0
-  Caption = 'TemplateListView'
-  ClientHeight = 503
-  ClientWidth = 1115
-  Color = clBtnFace
-  Font.Charset = ANSI_CHARSET
-  Font.Color = clWindowText
-  Font.Height = -11
-  Font.Name = 'Verdana'
-  Font.Style = []
-  KeyPreview = True
-  OldCreateOrder = False
-  Position = poDesktopCenter
-  WindowState = wsMaximized
-  OnCreate = FormCreate
-  OnDestroy = FormDestroy
+inherited PedidoVendaListView: TPedidoVendaListView
+  Caption = 'Pedidos de Venda'
+  ExplicitWidth = 1131
+  ExplicitHeight = 542
   PixelsPerInch = 96
   TextHeight = 13
-  object PanelHeader: TPanel
-    Left = 0
-    Top = 0
-    Width = 1115
-    Height = 65
-    Align = alTop
-    ParentBackground = False
-    TabOrder = 0
-    object BTNIncluir: TButton
-      Left = 4
-      Top = 10
-      Width = 100
-      Height = 48
-      Caption = 'Incluir'
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = []
-      ImageIndex = 0
-      Images = ImageList1
-      ParentFont = False
-      TabOrder = 0
-      OnClick = BTNIncluirClick
-    end
-    object BTNAlterar: TButton
-      Left = 110
-      Top = 10
-      Width = 100
-      Height = 48
-      Caption = 'Alterar'
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = []
-      ImageIndex = 1
-      Images = ImageList1
-      ParentFont = False
-      TabOrder = 1
-      OnClick = BTNAlterarClick
-    end
-    object BTNExcluir: TButton
-      Left = 215
-      Top = 11
-      Width = 100
-      Height = 48
-      Caption = 'Excluir'
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = []
-      ImageIndex = 2
-      Images = ImageList1
-      ParentFont = False
-      TabOrder = 2
-      OnClick = BTNExcluirClick
-    end
-  end
-  object DBGrid: TDBGrid
-    Left = 0
-    Top = 116
-    Width = 1115
-    Height = 368
-    Align = alClient
-    DataSource = DataSource
-    Font.Charset = ANSI_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -13
-    Font.Name = 'Verdana'
-    Font.Style = []
-    Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
-    ParentFont = False
-    PopupMenu = PPMList
-    TabOrder = 1
-    TitleFont.Charset = ANSI_CHARSET
-    TitleFont.Color = clWindowText
-    TitleFont.Height = -11
-    TitleFont.Name = 'Verdana'
-    TitleFont.Style = []
-    OnDrawColumnCell = DBGridDrawColumnCell
-    OnKeyDown = DBGridKeyDown
-    OnTitleClick = DBGridTitleClick
-  end
-  object StatusBar: TStatusBar
-    Left = 0
-    Top = 484
-    Width = 1115
-    Height = 19
-    Panels = <
+  inherited DBGrid: TDBGrid
+    Columns = <
       item
-        Text = 'RETURN - Tecle na tabela para visualizar os dados do registro'
-        Width = 50
+        Expanded = False
+        FieldName = 'ID'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'IDCLIENTE'
+        Title.Caption = 'ID Cliente'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'RAZAOSOCIAL'
+        Title.Caption = 'Raz'#227'o Social'
+        Width = 619
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'VALORTOTAL'
+        Title.Caption = 'Valor Total'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'CREATEDAT'
+        Visible = False
+      end
+      item
+        Expanded = False
+        FieldName = 'UPDATEDAT'
+        Visible = False
       end>
   end
-  object PanelFilter: TPanel
-    Left = 0
-    Top = 65
-    Width = 1115
-    Height = 51
-    Align = alTop
-    ParentBackground = False
-    TabOrder = 3
-    DesignSize = (
-      1115
-      51)
-    object BTNPesquisar: TButton
-      Left = 905
-      Top = 6
-      Width = 100
-      Height = 37
-      Anchors = [akTop, akRight]
-      Caption = 'Pesquisar'
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = []
-      ImageIndex = 3
-      Images = ImageList1
-      ParentFont = False
-      TabOrder = 0
-      OnClick = BTNPesquisarClick
-    end
-    object BTNLimpar: TButton
-      Left = 1011
-      Top = 7
-      Width = 100
-      Height = 37
-      Anchors = [akTop, akRight]
-      Caption = 'Limpar'
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = []
-      ImageIndex = 4
-      Images = ImageList1
-      ParentFont = False
-      TabOrder = 1
-      OnClick = BTNLimparClick
-    end
+  inherited DataSource: TDataSource
+    OnDataChange = DataSourceDataChange
   end
-  object DataSource: TDataSource
-    DataSet = FDQuery
-    Left = 512
-    Top = 144
-  end
-  object ImageList1: TImageList
-    Height = 32
-    Width = 32
-    Left = 272
-    Top = 144
+  inherited ImageList1: TImageList
     Bitmap = {
-      494C010105003400B00020002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010105003400B40020002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000800000004000000001002000000000000080
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1236,24 +1109,9 @@ object TemplateListView: TTemplateListView
       FFF81FFFFFFFC7FFFFFFFFFFFFFFFFFF00000000000000000000000000000000
       000000000000}
   end
-  object FDQuery: TFDQuery
-    Left = 568
-    Top = 144
-  end
-  object PPMList: TPopupMenu
-    Left = 216
-    Top = 144
-    object MIAlterar: TMenuItem
-      Caption = 'Alterar'
-      OnClick = MIAlterarClick
-    end
-    object MIExcluir: TMenuItem
-      Caption = 'Excluir'
-      OnClick = MIExcluirClick
-    end
-    object MIVisualizar: TMenuItem
-      Caption = 'Visualizar'
-      OnClick = MIVisualizarClick
-    end
+  inherited FDQuery: TFDQuery
+    ConnectionName = 'Huron'
+    SQL.Strings = (
+      'SELECT * FROM VWPedidoVenda')
   end
 end

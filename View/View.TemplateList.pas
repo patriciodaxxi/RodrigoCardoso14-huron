@@ -135,6 +135,32 @@ end;
 
 procedure TTemplateListView.DBGridKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
+  with DBGrid do
+  begin
+    if DgRowSelect in Options then
+    begin
+      if Key in [VK_LEFT, VK_RIGHT] then
+      begin
+        case Key of
+          VK_LEFT:
+            if (SsCtrl in Shift) then
+              Perform(WM_HSCROLL, SB_PAGELEFT, 0)
+            else
+              Perform(WM_HSCROLL, SB_LINELEFT, 0);
+
+          VK_RIGHT:
+            if (SsCtrl in Shift) then
+              Perform(WM_HSCROLL, SB_PAGERIGHT, 0)
+            else
+              Perform(WM_HSCROLL, SB_LINERIGHT, 0);
+        end;
+
+        Key := 0;
+        Exit;
+      end;
+    end;
+  end;
+
   if Key = VK_RETURN then
   begin
     Visualizar;

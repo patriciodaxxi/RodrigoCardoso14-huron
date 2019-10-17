@@ -30,7 +30,6 @@ type
     constructor Create; virtual;
     destructor Destroy; override;
     function Validate: Boolean; virtual;
-    function ToStringModel: string; virtual; abstract;
 
     property ID: Integer read FID write SetID;
     property CreatedAt: TDateTime read FCreatedAt write SetCreatedAt;

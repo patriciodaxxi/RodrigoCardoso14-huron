@@ -39,8 +39,14 @@ object PrincipalView: TPrincipalView
     Width = 686
     Height = 19
     Panels = <>
-    ExplicitLeft = 352
-    ExplicitTop = 184
-    ExplicitWidth = 0
+  end
+  object BTNPedidoVenda: TButton
+    Left = 384
+    Top = 56
+    Width = 233
+    Height = 121
+    Caption = 'BTNPedidoVenda'
+    TabOrder = 3
+    OnClick = BTNPedidoVendaClick
   end
 end
