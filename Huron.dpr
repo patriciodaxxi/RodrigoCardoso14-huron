@@ -22,15 +22,18 @@ uses
   Controller.PedidoVenda in 'Controller\Controller.PedidoVenda.pas',
   Singleton.Connection in 'Singleton\Singleton.Connection.pas',
   View.Cliente in 'View\View.Cliente.pas' {ClienteView},
-  View.ClienteList in 'View\View.ClienteList.pas' {TemplateListView1};
+  View.ClienteList in 'View\View.ClienteList.pas' {ClienteListView},
+  Vcl.Themes,
+  Vcl.Styles,
+  View.ProdutoList in 'View\View.ProdutoList.pas' {ProdutoListView},
+  View.Produto in 'View\View.Produto.pas' {ProdutoView};
 
 {$R *.res}
 
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
+  TStyleManager.TrySetStyle('Windows10');
   Application.CreateForm(TPrincipalView, PrincipalView);
-  Application.CreateForm(TClienteView, ClienteView);
-  Application.CreateForm(TTemplateListView1, TemplateListView1);
   Application.Run;
 end.

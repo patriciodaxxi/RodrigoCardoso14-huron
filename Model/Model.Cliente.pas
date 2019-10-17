@@ -41,7 +41,8 @@ implementation
 constructor TCliente.Create;
 begin
   inherited;
-
+  DataBaseObject.Table := 'Cliente';
+  DataBaseObject.View := 'VWCliente';
 end;
 
 destructor TCliente.Destroy;

@@ -32,7 +32,8 @@ implementation
 constructor TProduto.Create;
 begin
   inherited;
-
+  DataBaseObject.Table := 'Produto';
+  DataBaseObject.View := 'VWProduto';
 end;
 
 destructor TProduto.Destroy;

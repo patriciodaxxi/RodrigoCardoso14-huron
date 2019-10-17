@@ -59,6 +59,7 @@
         <UWP_DelphiLogo44>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_44.png</UWP_DelphiLogo44>
         <UWP_DelphiLogo150>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_150.png</UWP_DelphiLogo150>
         <SanitizedProjectName>Huron</SanitizedProjectName>
+        <Custom_Styles>Windows10|VCLSTYLE|$(BDSCOMMONDIR)\Styles\Windows10.vsf</Custom_Styles>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win32)'!=''">
         <DCC_UsePackage>DBXSqliteDriver;DataSnapServerMidas;DBXDb2Driver;DBXInterBaseDriver;vclactnband;ACBr_TEFD;vclFireDAC;ACBr_SATWS;svnui;tethering;FireDACADSDriver;frxe25;ACBr_BPe;DBXMSSQLDriver;ACBr_MDFeDamdfeRL;DatasnapConnectorsFreePascal;FireDACMSSQLDriver;vcltouch;ACBr_NFe;ACBr_NFeDanfeFR;vcldb;bindcompfmx;svn;Intraweb;DBXOracleDriver;fsIBX25;ACBrDFeReportRL;inetdb;ACBr_NFeDanfeESCPOS;ACBr_Diversos;ACBr_TXTComum;FmxTeeUI;emsedge;fmx;fmxdae;frxDB25;vclib;ACBr_CTeDacteFR;frxTee25;ACBr_Ponto;FireDACDBXDriver;dbexpress;IndyCore;ACBr_NFSeDanfseFR;vclx;dsnap;DataSnapCommon;fsTee25;ACBr_SATExtratoRL;ACBr_PCNComum;DataSnapConnectors;ACBR_DeSTDA;VCLRESTComponents;ACBr_Reinf;ACBr_SAT;vclie;fs25;bindengine;DBXMySQLDriver;FireDACOracleDriver;FireDACMySQLDriver;DBXFirebirdDriver;ACBr_PAF;ACBr_SATECFVirtual;ACBr_Sintegra;FireDACCommonODBC;ACBr_GNRE;DataSnapClient;bindcompdbx;IndyIPCommon;ACBr_TCP;ACBr_CTeDacteRL;vcl;DBXSybaseASEDriver;IndyIPServer;ACBr_CTe;ACBr_SATExtratoESCPOS;IndySystem;ACBr_NFeDanfeRL;FireDACDb2Driver;ACBr_Integrador;dsnapcon;madExcept_;ACBr_synapse;ACBre_Social;FireDACMSAccDriver;fmxFireDAC;FireDACInfxDriver;vclimg;fsADO25;TeeDB;madBasic_;ACBr_SPED;ACBr_SPEDImportar;emshosting;ACBr_Comum;ACBr_MDFe;ACBr_BoletoRL;FireDACPgDriver;ibmonitor;FireDACASADriver;frxADO25;DBXOdbcDriver;FireDACTDataDriver;FMXTee;ACBr_LFD;ACBr_GNREGuiaRL;DbxCommonDriver;ibxpress;Tee;ACBr_NFSeDanfseRL;DataSnapServer;xmlrtl;DataSnapNativeClient;fmxobj;vclwinx;ibxbindings;rtl;FireDACDSDriver;DbxClientDriver;frx25;DBXSybaseASADriver;madDisAsm_;CustomIPTransport;vcldsnap;ACBr_OpenSSL;ACBr_DFeComum;fsDB25;ACBr_Convenio115;bindcomp;appanalytics;ACBr_Serial;DBXInformixDriver;IndyIPClient;frxDBX25;bindcompvcl;frce;TeeUI;ACBr_BlocoX;dbxcds;VclSmp;ACBr_NFCeECFVirtual;adortl;FireDACODBCDriver;ACBr_BoletoFR;DataSnapIndy10ServerTransport;ACBr_Boleto;ACBr_ANe;dsnapxml;DataSnapProviderClient;dbrtl;inetdbxpress;FireDACMongoDBDriver;IndyProtocols;frxIBX25;ACBr_SEF2;ACBr_MDFeDamdfeFR;ACBr_NFSe;ACBr_MTER;tmsdXE10;fmxase;$(DCC_UsePackage)</DCC_UsePackage>
@@ -84,6 +85,8 @@
         <DCC_RemoteDebug>false</DCC_RemoteDebug>
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
         <AppEnableHighDPI>true</AppEnableHighDPI>
+        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+        <VerInfo_Locale>1033</VerInfo_Locale>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
@@ -132,7 +135,15 @@
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="View\View.ClienteList.pas">
-            <Form>TemplateListView1</Form>
+            <Form>ClienteListView</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="View\View.ProdutoList.pas">
+            <Form>ProdutoListView</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="View\View.Produto.pas">
+            <Form>ProdutoView</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <BuildConfiguration Include="Release">
@@ -155,6 +166,10 @@
                 <Source>
                     <Source Name="MainSource">Huron.dpr</Source>
                 </Source>
+                <Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dcloffice2k250.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclofficexp250.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
+                </Excluded_Packages>
             </Delphi.Personality>
             <Deployment Version="3">
                 <DeployFile LocalName="Win32\Debug\Huron.exe" Configuration="Debug" Class="ProjectOutput">

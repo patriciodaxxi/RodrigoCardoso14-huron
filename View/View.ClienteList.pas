@@ -13,7 +13,8 @@ uses
   Controller.Cliente, Util.Enum, View.Template;
 
 type
-  TTemplateListView1 = class(TTemplateListView)
+  TClienteListView = class(TTemplateListView)
+    procedure BTNPesquisarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -22,7 +23,7 @@ type
   end;
 
 var
-  TemplateListView1: TTemplateListView1;
+  ClienteListView: TClienteListView;
 
 implementation
 
@@ -30,14 +31,20 @@ implementation
 
 { TTemplateListView1 }
 
-procedure TTemplateListView1.CreateController;
+procedure TClienteListView.BTNPesquisarClick(Sender: TObject);
+begin
+  inherited;
+  FDQuery.Open('SELECT * FROM VWCliente');
+end;
+
+procedure TClienteListView.CreateController;
 begin
   inherited;
   if not Assigned(Controller) then
     Controller := TClienteController.Create;
 end;
 
-function TTemplateListView1.CreateViewTemplate(AOperacao: TOperacao): TTemplateView;
+function TClienteListView.CreateViewTemplate(AOperacao: TOperacao): TTemplateView;
 begin
   Result := TClienteView.Create(Self);
 end;

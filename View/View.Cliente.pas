@@ -16,22 +16,23 @@ type
     EDTEndereco: TLabeledEdit;
     EDTTelefone: TLabeledEdit;
     EDTEmail: TLabeledEdit;
+    LBLCNPJ: TLabel;
   private
-    { Private declarations }
   public
     procedure SetViewByModel(const AModel: TModel); override;
     procedure SetModelByView; override;
     function Validate: Boolean; override;
     procedure CreateController; override;
     procedure CleanModel; override;
-
-
   end;
 
 var
   ClienteView: TClienteView;
 
 implementation
+
+uses
+  Util.View;
 
 {$R *.dfm}
 
@@ -81,9 +82,15 @@ function TClienteView.Validate: Boolean;
 var
   LMensagem: string;
 begin
-  LMensagem := '';
+  LMensagem := EmptyStr;
   Result := True;
-  if Trim(EDTNomeFantasia.Text).IsEmpty then
+  if Trim(EDTRazaoSocial.Text).IsEmpty then
+  begin
+    LMensagem := 'Informe a Razão Social';
+    EDTRazaoSocial.SetFocus;
+    Result := False;
+  end
+  else if Trim(EDTNomeFantasia.Text).IsEmpty then
   begin
     LMensagem := 'Informe o Nome Fantasia';
     EDTNomeFantasia.SetFocus;
@@ -93,6 +100,24 @@ begin
   begin
     LMensagem := 'CNPJ inválido';
     MSKCNPJ.SetFocus;
+    Result := False;
+  end
+  else if Trim(EDTEndereco.Text).IsEmpty then
+  begin
+    LMensagem := 'Informe o Endereço';
+    EDTEndereco.SetFocus;
+    Result := False;
+  end
+  else if Trim(EDTTelefone.Text).IsEmpty then
+  begin
+    LMensagem := 'Informe o Telefone';
+    EDTTelefone.SetFocus;
+    Result := False;
+  end
+  else if not ValidarEMail(EDTEmail.Text) then
+  begin
+    LMensagem := 'Informe um E-mail válido';
+    EDTEmail.SetFocus;
     Result := False;
   end;
 

@@ -3,7 +3,7 @@ unit Controller;
 interface
 
 uses
-  DAO, Model, Singleton.Connection, Util.Enum;
+  DAO, Model, Singleton.Connection, Util.Enum, DB;
 
 type
   TController = class
@@ -57,8 +57,7 @@ procedure TController.Save(const AOperacao: TOperacao; const AModel: TModel);
 begin
   BeforeSave(AOperacao, AModel);
   case AOperacao of
-    oCreate: DAO.Insert(AModel);
-    oUpdate: DAO.Update(AModel);
+    oCreate, oUpdate: DAO.Save(AModel);
     oDelete: DAO.Delete(AModel);
   end;
   AfterSave(AOperacao, AModel);
@@ -84,6 +83,17 @@ begin
       TConnectionSingleton.GetInstance.FDConnection.Commit;
       Result := True;
     except
+      on E: EDataBaseError do
+      begin
+        if AOperacao = oDelete then
+          AMensagem := 'Não foi possível excluir esse registro.'
+        else
+          AMensagem := StringReplace(E.Message, Slinebreak, '. ', [RfReplaceAll]);
+
+        Result := False;
+        TConnectionSingleton.GetInstance.FDConnection.Rollback;
+      end;
+
       on E: Exception do
       begin
         AMensagem := StringReplace(E.Message, Slinebreak, '. ', [RfReplaceAll]);

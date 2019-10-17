@@ -4,17 +4,20 @@ interface
 
 uses
   Vcl.StdCtrls, FireDAC.Comp.Client, SysUtils, Singleton.Connection, VCL.Forms,
-  VCL.Controls, VCL.Mask, Windows, VCL.ComCtrls;
+  VCL.Controls, VCL.Mask, Windows, VCL.ComCtrls, Vcl.ExtCtrls;
 
 type
   TFormEventHelper = class helper for TForm
     procedure ValidarDataMaskEditExit(Sender: TObject);
   end;
 
+function ValidarEMail(AEMail: string): Boolean;
 procedure LimparCampos(const AView: TForm);
 procedure HabilitarCampos(const AView: TForm; const AFlag: Boolean);
 function RemoverMascara(AText: string): string;
 procedure KeyUpperCase(var Key: Char);
+
+const FormatoFloat: string = '0.00000';
 
 implementation
 
@@ -32,6 +35,7 @@ begin
       if AView.Components[I] is TWinControl then
       begin
         if (AView.Components[I] is TEdit)
+          or (AView.Components[I] is TLabeledEdit)
           or (AView.Components[I] is TComboBox)
           or (AView.Components[I] is TMaskEdit)
           or (AView.Components[I] is TDateTimePicker)
@@ -41,11 +45,11 @@ begin
         end
         else if AView.Components[I] is TStringGrid then
         begin
+          (AView.Components[I] as TWinControl).Enabled := True;
           if AFlag then
             (AView.Components[I] as TStringGrid).Options := (AView.Components[I] as TStringGrid).Options + [goEditing] - [goRowSelect]
           else
-            (AView.Components[I] as TStringGrid).Options := (AView.Components[I] as TStringGrid).Options - [goEditing] + [goRowSelect]
-
+            (AView.Components[I] as TStringGrid).Options := (AView.Components[I] as TStringGrid).Options - [goEditing] + [goRowSelect];
         end;
       end;
     end;
@@ -66,6 +70,10 @@ begin
         if AView.Components[I] is TEdit then
         begin
           (AView.Components[I] as TEdit).Clear;
+        end
+        else if AView.Components[I] is TLabeledEdit then
+        begin
+          (AView.Components[I] as TLabeledEdit).Clear;
         end
         else if AView.Components[I] is TComboBox then
         begin
@@ -138,6 +146,20 @@ begin
         (Sender as TMaskEdit).SetFocus;
       end;
     end;
+  end;
+end;
+
+function ValidarEMail(AEMail: string): Boolean;
+begin
+  AEmail := Trim(UpperCase(AEmail));
+  if Pos('@', AEmail) > 1 then
+  begin
+    Delete(AEmail, 1, pos('@', AEmail));
+    Result := (Length(AEmail) > 0) and (Pos('.', AEmail) > 2);
+  end
+  else
+  begin
+    Result := False;
   end;
 end;
 

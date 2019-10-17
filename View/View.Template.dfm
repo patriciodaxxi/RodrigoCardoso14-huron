@@ -1,16 +1,18 @@
 object TemplateView: TTemplateView
   Left = 0
   Top = 0
+  BorderIcons = [biSystemMenu, biMinimize, biHelp]
   Caption = 'TemplateView'
   ClientHeight = 472
   ClientWidth = 613
   Color = clBtnFace
-  Font.Charset = DEFAULT_CHARSET
+  Font.Charset = ANSI_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
-  Font.Name = 'Tahoma'
+  Font.Name = 'Verdana'
   Font.Style = []
   OldCreateOrder = False
+  Position = poDesktopCenter
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnKeyDown = FormKeyDown
@@ -22,8 +24,6 @@ object TemplateView: TTemplateView
     Width = 613
     Height = 19
     Panels = <>
-    ExplicitTop = 388
-    ExplicitWidth = 578
   end
   object Panel1: TPanel
     Left = 0
@@ -32,8 +32,6 @@ object TemplateView: TTemplateView
     Height = 41
     Align = alBottom
     TabOrder = 1
-    ExplicitTop = 347
-    ExplicitWidth = 578
     DesignSize = (
       613
       41)
@@ -64,7 +62,6 @@ object TemplateView: TTemplateView
       NumGlyphs = 2
       TabOrder = 0
       OnClick = BtnGravarClick
-      ExplicitLeft = 363
     end
     object BtnCancelar: TBitBtn
       Left = 504
@@ -93,7 +90,6 @@ object TemplateView: TTemplateView
       NumGlyphs = 2
       TabOrder = 1
       OnClick = BtnCancelarClick
-      ExplicitLeft = 469
     end
   end
 end

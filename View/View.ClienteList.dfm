@@ -1,10 +1,69 @@
-inherited TemplateListView1: TTemplateListView1
-  Caption = 'TemplateListView1'
+inherited ClienteListView: TClienteListView
+  Caption = 'ClienteListView'
   PixelsPerInch = 96
   TextHeight = 13
+  inherited DBGrid: TDBGrid
+    Font.Height = -13
+    ParentFont = False
+    Columns = <
+      item
+        Expanded = False
+        FieldName = 'ID'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'RAZAOSOCIAL'
+        Title.Caption = 'Raz'#227'o Social'
+        Width = 379
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'NOMEFANTASIA'
+        Title.Caption = 'Nome Fantasia'
+        Width = 253
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'CNPJ'
+        Width = 131
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'ENDERECO'
+        Title.Caption = 'Endereco'
+        Visible = False
+      end
+      item
+        Expanded = False
+        FieldName = 'TELEFONE'
+        Title.Caption = 'Telefone'
+        Width = 107
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'EMAIL'
+        Title.Caption = 'E-mail'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'CREATEDAT'
+        Visible = False
+      end
+      item
+        Expanded = False
+        FieldName = 'UPDATEDAT'
+        Visible = False
+      end>
+  end
   inherited ImageList1: TImageList
     Bitmap = {
-      494C010105003400A40020002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010105003400AC0020002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000800000004000000001002000000000000080
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1066,5 +1125,11 @@ inherited TemplateListView1: TTemplateListView1
       FFF00FFFFFFF80FFFFFC3FFFFF007FFFFFF00FFFFFFFC3FFFFFFFFFFFFFFFFFF
       FFF81FFFFFFFC7FFFFFFFFFFFFFFFFFF00000000000000000000000000000000
       000000000000}
+  end
+  inherited FDQuery: TFDQuery
+    Active = True
+    ConnectionName = 'Huron'
+    SQL.Strings = (
+      'SELECT * FROM VWCLIENTE')
   end
 end

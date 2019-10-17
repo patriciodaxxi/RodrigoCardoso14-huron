@@ -90,7 +90,7 @@ begin
         end
         else
         begin
-          Application.MessageBox(PWideChar('Erro ao excluir registro. Erro: ' + LMensagem), 'Erro', MB_OK + MB_ICONERROR);
+          Application.MessageBox(PWideChar('Erro: ' + LMensagem), 'Erro', MB_OK + MB_ICONERROR);
         end;
       finally
         DataSource.DataSet.Refresh;
@@ -188,7 +188,8 @@ begin
     FViewTemplate.Operacao := AOperacao;
     FViewTemplate.ShowModal;
   finally
-    DataSource.DataSet.Refresh;
+    if DataSource.DataSet.Active then
+      DataSource.DataSet.Refresh;
     FreeAndNil(FViewTemplate);
   end;
 end;

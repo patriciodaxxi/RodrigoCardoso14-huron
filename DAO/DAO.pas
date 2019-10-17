@@ -11,15 +11,19 @@ type
   private
     FModel: TModel;
     procedure SetModel(const Value: TModel);
+    function CheckID(AID: Integer): Boolean;
+    function GenerateID: Integer;
+    function GetNewID: Integer;
+    procedure RefreshGenerator;
+    function GetMaxID: Integer;
   public
+    constructor Create; virtual;
     function CreateModel: TModel; virtual; abstract;
     function Find(const AID: Integer): TModel; overload;
     function Find(const ACondition: string = ''): TObjectList<TModel>; overload;
     function StringInsert: string; virtual; abstract;
-    function StringUpdate: string; virtual; abstract;
     function StringDelete: string; virtual;
-    procedure Insert(const AModel: TModel); virtual;
-    procedure Update(const AModel: TModel); virtual;
+    procedure Save(const AModel: TModel); virtual;
     procedure Delete(const AModel: TModel); virtual;
     procedure SetParameters(var AFDQuery: TFDQuery; const AModel: TModel); virtual;
     function SetModelByDataSet(AFDQuery: TFDQuery): TModel; virtual;
@@ -30,6 +34,11 @@ type
 implementation
 
 { TDAO }
+
+constructor TDAO.Create;
+begin
+  Model := CreateModel;
+end;
 
 procedure TDAO.Delete(const AModel: TModel);
 var
@@ -100,7 +109,7 @@ begin
   end;
 end;
 
-procedure TDAO.Insert(const AModel: TModel);
+procedure TDAO.Save(const AModel: TModel);
 var
   FDQuery: TFDQuery;
 begin
@@ -133,7 +142,13 @@ procedure TDAO.SetParameters(var AFDQuery: TFDQuery; const AModel: TModel);
 begin
   inherited;
   if Assigned(AFDQuery.FindParam('ID')) then
+  begin
+    if AModel.ID <= 0 then
+    begin
+      AModel.ID := GenerateID;
+    end;
     AFDQuery.ParamByName('ID').AsInteger := AModel.ID;
+  end;
 
   if Assigned(AFDQuery.FindParam('CreatedAt')) then
     AFDQuery.ParamByName('CreatedAt').AsDateTime := AModel.CreatedAt;
@@ -147,17 +162,73 @@ begin
   Result := EmptyStr;
 end;
 
-procedure TDAO.Update(const AModel: TModel);
+function TDAO.GenerateID: Integer;
+var
+  LID: Boolean;
+begin
+  repeat
+    Result := GetNewID;
+    LID := CheckID(Result)
+  until (LID = False);
+end;
+
+function TDAO.GetNewID: Integer;
 var
   FDQuery: TFDQuery;
 begin
   FDQuery := TFDQuery.Create(nil);
-  FDQuery.Connection := TConnectionSingleton.GetInstance.FDConnection;
   try
-    FDQuery .Close;
-    FDQuery.SQL.Text := StringUpdate;
-    SetParameters(FDQuery, AModel);
+    FDQuery.Connection := TConnectionSingleton.GetInstance.FDConnection;
+    FDQuery.Open('SELECT GEN_ID(' + 'GEN_' + Model.DataBaseObject.Table + '_ID' + ', 1) FROM RDB$DATABASE; ');
+    Result := FDQuery.Fields[0].AsInteger;
+  finally
+    FreeAndNil(FDQuery);
+  end;
+end;
+
+function TDAO.CheckID(AID: Integer): Boolean;
+var
+  FDQuery: TFDQuery;
+begin
+  Result := False;
+  FDQuery := TFDQuery.Create(nil);
+  try
+    FDQuery.Connection := TConnectionSingleton.GetInstance.FDConnection;
+    FDQuery.Open(Format('SELECT ID FROM %s where  ID = %d ', [Model.DataBaseObject.Table, AID]));
+    if (FDQuery.Fields[0].AsInteger > 0) then
+    begin
+      RefreshGenerator;
+      Result := True;
+    end;
+  finally
+    FreeAndNil(FDQuery);
+  end;
+end;
+
+procedure TDAO.RefreshGenerator;
+var
+  FDQuery: TFDQuery;
+begin
+  FDQuery := TFDQuery.Create(nil);
+  try
+    FDQuery.Connection := TConnectionSingleton.GetInstance.FDConnection;
+    FDQuery.Close;
+    FDQuery.SQL.Text := ' SET Generator ' + 'GEN_' + Model.DataBaseObject.Table + '_ID TO ' + GetMaxID.ToString;
     FDQuery.ExecSQL;
+  finally
+    FreeAndNil(FDQuery);
+  end;
+end;
+
+function TDAO.GetMaxID: Integer;
+var
+  FDQuery: TFDQuery;
+begin
+  FDQuery := TFDQuery.Create(nil);
+  try
+    FDQuery.Connection := TConnectionSingleton.GetInstance.FDConnection;
+    FDQuery.Open('SELECT MAX(ID) FROM ' + Model.DataBaseObject.Table);
+    Result := FDQuery.Fields[0].AsInteger;
   finally
     FreeAndNil(FDQuery);
   end;

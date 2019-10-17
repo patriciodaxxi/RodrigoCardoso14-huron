@@ -44,7 +44,7 @@ implementation
 
 constructor TModel.Create;
 begin
-
+  DataBaseObject := TDataBaseObject.Create;
 end;
 
 destructor TModel.Destroy;
