@@ -14,9 +14,10 @@ type
     EDTNomeFantasia: TLabeledEdit;
     MSKCNPJ: TMaskEdit;
     EDTEndereco: TLabeledEdit;
-    EDTTelefone: TLabeledEdit;
     EDTEmail: TLabeledEdit;
     LBLCNPJ: TLabel;
+    LBLTelefone: TLabel;
+    MSKTelefone: TMaskEdit;
   private
   public
     procedure SetViewByModel(const AModel: TModel); override;
@@ -59,7 +60,7 @@ begin
     NomeFantasia := EDTNomeFantasia.Text;
     CNPJ := MSKCNPJ.Text;
     Endereco := EDTEndereco.Text;
-    Telefone := EDTTelefone.Text;
+    Telefone := MSKTelefone.Text;
     Email := EDTEmail.Text;
   end;
 end;
@@ -73,7 +74,7 @@ begin
     EDTNomeFantasia.Text := NomeFantasia;
     MSKCNPJ.Text := CNPJ;
     EDTEndereco.Text := Endereco;
-    EDTTelefone.Text := Telefone;
+    MSKTelefone.Text := Telefone;
     EDTEmail.Text := Email;
   end;
 end;
@@ -108,10 +109,10 @@ begin
     EDTEndereco.SetFocus;
     Result := False;
   end
-  else if Trim(EDTTelefone.Text).IsEmpty then
+  else if Trim(MSKTelefone.Text).IsEmpty then
   begin
     LMensagem := 'Informe o Telefone';
-    EDTTelefone.SetFocus;
+    MSKTelefone.SetFocus;
     Result := False;
   end
   else if not ValidarEMail(EDTEmail.Text) then

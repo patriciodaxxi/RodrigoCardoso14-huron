@@ -12,11 +12,13 @@ type
     FValorVenda: Double;
     FValorTotal: Double;
     FQuantidade: Double;
+    FSequencia: Integer;
     procedure SetProduto(const Value: TProduto);
     procedure SetQuantidade(const Value: Double);
     procedure SetValorTotal(const Value: Double);
     procedure SetValorVenda(const Value: Double);
     function GetProduto: TProduto;
+    procedure SetSequencia(const Value: Integer);
   public
     constructor Create; override;
     destructor Destroy; override;
@@ -27,6 +29,7 @@ type
     property ValorVenda: Double read FValorVenda write SetValorVenda;
     property Quantidade: Double read FQuantidade write SetQuantidade;
     property ValorTotal: Double read FValorTotal write SetValorTotal;
+    property Sequencia: Integer read FSequencia write SetSequencia;
   end;
 
 implementation
@@ -50,7 +53,6 @@ begin
   inherited;
   DataBaseObject.Table := 'PedidoVendaItem';
   DataBaseObject.View := 'VWPedidoVendaItem';
-  //Produto := TProduto.Create;
 end;
 
 destructor TItem.Destroy;
@@ -74,6 +76,11 @@ end;
 procedure TItem.SetQuantidade(const Value: Double);
 begin
   FQuantidade := Value;
+end;
+
+procedure TItem.SetSequencia(const Value: Integer);
+begin
+  FSequencia := Value;
 end;
 
 procedure TItem.SetValorTotal(const Value: Double);

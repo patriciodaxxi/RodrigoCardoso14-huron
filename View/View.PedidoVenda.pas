@@ -19,6 +19,7 @@ type
     LBLRemoverProduto: TLabel;
     LBLQuantidadeItensRotulo: TLabel;
     LBLQuantidadeItens: TLabel;
+    LBLDown: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure SGPedidoVendaItensDrawCell(Sender: TObject; ACol, ARow: Integer; Rect: TRect; State: TGridDrawState);
@@ -134,9 +135,9 @@ begin
     Cells[Colunas.IndexOf('ValorVenda'), 0] := 'Valor';
     Cells[Colunas.IndexOf('ValorTotal'), 0] := 'Total';
     ColWidths[Colunas.IndexOf('Produto')] := 400;
-    ColWidths[Colunas.IndexOf('Quantidade')] := 100;
-    ColWidths[Colunas.IndexOf('ValorVenda')] := 100;
-    ColWidths[Colunas.IndexOf('ValorTotal')] := 100;
+    ColWidths[Colunas.IndexOf('Quantidade')] := 120;
+    ColWidths[Colunas.IndexOf('ValorVenda')] := 120;
+    ColWidths[Colunas.IndexOf('ValorTotal')] := 120;
   end;
 end;
 
@@ -161,7 +162,7 @@ begin
             begin
               TItem(Objects[COLOBJECT, I]).Quantidade := StrToFloatDef(Cells[Colunas.IndexOf('Quantidade'), I], 0);
               TItem(Objects[COLOBJECT, I]).ValorVenda := StrToFloatDef(Cells[Colunas.IndexOf('ValorVenda'), I], 0);
-              TItem(Objects[COLOBJECT, I]).ValorTotal := StrToFloatDef(Cells[Colunas.IndexOf('ValorTotal'), I], 0);
+              TItem(Objects[COLOBJECT, I]).ValorTotal := StrToFloatDef(Cells[Colunas.IndexOf('Quantidade'), I], 0) * StrToFloatDef(Cells[Colunas.IndexOf('ValorVenda'), I], 0);
               ListItem.Add(TItem(Objects[COLOBJECT, I]));
             end;
           end;
@@ -201,19 +202,29 @@ begin
   end;
 end;
 
-procedure TPedidoVendaView.SGPedidoVendaItensDrawCell(Sender: TObject; ACol,
-  ARow: Integer; Rect: TRect; State: TGridDrawState);
+procedure TPedidoVendaView.SGPedidoVendaItensDrawCell(Sender: TObject; ACol, ARow: Integer; Rect: TRect; State: TGridDrawState);
+var
+  LText: string;
+  X, Y: Integer;
 begin
   inherited;
+  LText := SGPedidoVendaItens.Cells[ACol, ARow];
   with SGPedidoVendaItens do
   begin
     if (ARow <= FixedRows - 1) then
     begin
       Brush.Style := (bsSolid);
       Canvas.Font.Style := [fsBold];
-      {Canvas.Rectangle(Rect.Left,Rect.Top,Rect.Right,Rect.Bottom);
-      Canvas.FillRect(Rect);
-      Canvas.TextOut(Rect.right,Rect.Top, Cells[ACol, ARow]);}
+    end
+    else
+    begin
+      if ACol in [Colunas.IndexOf('Quantidade'), Colunas.IndexOf('ValorVenda'), Colunas.IndexOf('ValorTotal')] then
+      begin
+        SGPedidoVendaItens.Canvas.FillRect(Rect);
+        Y := Rect.Top + (Rect.Bottom - Rect.Top) div 2 - Canvas.TextHeight(LText) div 2;
+        X := Rect.Right - Canvas.TextWidth(LText) - 2;
+        Canvas.TextRect(Rect, X, Y, LText);
+      end;
     end;
   end;
 end;
@@ -227,6 +238,11 @@ begin
   begin
     if Key = VK_TAB then
     begin
+      if (SGPedidoVendaItens.Col = Colunas.IndexOf('ValorTotal')) and (not VerificarProduto(SGPedidoVendaItens.Row)) then
+      begin
+        Perform(WM_NEXTDLGCTL, 0, 0)
+      end;
+
       if VerificarProduto(SGPedidoVendaItens.Row) then
       begin
         if SGPedidoVendaItens.Col = Colunas.IndexOf('Quantidade') then
@@ -283,6 +299,13 @@ begin
       begin
         SGPedidoVendaItens.Rows[SGPedidoVendaItens.Row].Clear;
         SGPedidoVendaItens.Col := Colunas.IndexOf('Produto');
+      end
+      else
+      begin
+        if SGPedidoVendaItens.Col = Colunas.IndexOf('ValorTotal') then
+        begin
+          Key := 0;
+        end;
       end;
     end;
     TotalizarPedidoVenda;
@@ -293,6 +316,22 @@ procedure TPedidoVendaView.SGPedidoVendaItensKeyPress(Sender: TObject; var Key: 
 begin
   inherited;
   KeyUpperCase(Key);
+  with SGPedidoVendaItens do
+  begin
+    if Col = Colunas.IndexOf('ValorTotal') then
+    begin
+      Key := #0;
+    end;
+
+    if Col in [Colunas.IndexOf('Quantidade'),
+               Colunas.IndexOf('ValorVenda'),
+               Colunas.IndexOf('ValorTotal')]
+    then
+    begin
+      if Key <> #8  then
+        DecimalOnly(Key, SGPedidoVendaItens);
+    end;
+  end;
 end;
 
 procedure TPedidoVendaView.SGPedidoVendaItensSetEditText(Sender: TObject; ACol, ARow: Integer; const Value: string);
@@ -362,7 +401,9 @@ begin
       if VerificarProduto(I) then
       begin
         Inc(LQuantidadeItens);
-        LValorTotalPedidoVenda := LValorTotalPedidoVenda + (StrToFloatDef(Cells[Colunas.IndexOf('ValorTotal'), I], 0));
+        LValorTotalPedidoVenda :=
+          LValorTotalPedidoVenda +
+          (StrToFloatDef(Cells[Colunas.IndexOf('Quantidade'), I], 0) * StrToFloatDef(Cells[Colunas.IndexOf('ValorVenda'), I], 0));
       end;
     end;
   end;

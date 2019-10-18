@@ -76,7 +76,7 @@ begin
   try
     FDQuery.Connection := TConnectionSingleton.GetInstance.FDConnection;
     FDQuery.Close;
-    FDQuery.SQL.Text := 'SELECT * FROM ' + Model.DataBaseObject.View + ' WHERE ' + ACondition + ' ORDER BY ID';
+    FDQuery.SQL.Text := 'SELECT * FROM ' + Model.DataBaseObject.View + ' WHERE ' + ACondition;
     FDQuery.Open;
 
     Result.Clear;

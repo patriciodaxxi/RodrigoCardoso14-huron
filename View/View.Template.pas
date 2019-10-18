@@ -159,9 +159,9 @@ end;
 
 procedure TTemplateView.SetModelByView;
 begin
-  //if Operacao = oCreate then
   CleanModel;
-  Model.ID := StrToInt(LBLID.Caption);
+  if Operacao = oUpdate then
+    Model.ID := StrToInt(LBLID.Caption);
 end;
 
 procedure TTemplateView.SetOperacao(const Value: TOperacao);

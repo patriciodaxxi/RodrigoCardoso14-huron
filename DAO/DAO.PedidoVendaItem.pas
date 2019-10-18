@@ -55,6 +55,7 @@ begin
       FDQuery.ParamByName('ValorVenda').AsFloats[I] := LItem.ValorVenda;
       FDQuery.ParamByName('Quantidade').AsFloats[I] := LItem.Quantidade;
       FDQuery.ParamByName('ValorTotal').AsFloats[I] := LItem.ValorTotal;
+      FDQuery.ParamByName('Sequencia').AsIntegers[I] := I;
       Inc(I);
     end;
 
@@ -77,6 +78,7 @@ begin
       ValorVenda := FieldByName('ValorVenda').AsFloat;
       Quantidade := FieldByName('Quantidade').AsFloat;
       ValorTotal := FieldByName('ValorTotal').AsFloat;
+      Sequencia := FieldByName('Sequencia').AsInteger;
     end;
   finally
     FreeAndNil(LProdutoDAO);
@@ -101,10 +103,10 @@ begin
   SB := TStringBuilder.Create;
   try
     SB.Append('UPDATE OR INSERT INTO PedidoVendaItem ( ').
-         Append('ID, IDPedidoVenda, IDProduto, ').
+         Append('ID, IDPedidoVenda, IDProduto, Sequencia, ').
          Append('ValorVenda, Quantidade, ValorTotal) ').
        Append('VALUES( ').
-         Append(':ID, :IDPedidoVenda, :IDProduto, ').
+         Append(':ID, :IDPedidoVenda, :IDProduto, :Sequencia, ').
          Append(':ValorVenda, :Quantidade, :ValorTotal) ').
        Append('MATCHING (ID) RETURNING ID');
     Result := SB.ToString;

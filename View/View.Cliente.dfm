@@ -13,6 +13,13 @@ inherited ClienteView: TClienteView
     Height = 13
     Caption = 'CNPJ:'
   end
+  object LBLTelefone: TLabel [1]
+    Left = 132
+    Top = 256
+    Width = 53
+    Height = 13
+    Caption = 'Telefone:'
+  end
   inherited stat1: TStatusBar
     Top = 407
     Width = 602
@@ -25,20 +32,22 @@ inherited ClienteView: TClienteView
         Text = 'Atualizado em: 14/10/2019 10:10:10'
         Width = 200
       end>
+    ExplicitTop = 407
+    ExplicitWidth = 602
   end
   inherited Panel1: TPanel
     Top = 366
     Width = 602
     TabOrder = 6
-    ExplicitTop = 403
-    ExplicitWidth = 738
+    ExplicitTop = 366
+    ExplicitWidth = 602
     inherited BtnGravar: TBitBtn
       Left = 387
-      ExplicitLeft = 523
+      ExplicitLeft = 387
     end
     inherited BtnCancelar: TBitBtn
       Left = 493
-      ExplicitLeft = 629
+      ExplicitLeft = 493
     end
   end
   object EDTRazaoSocial: TLabeledEdit
@@ -94,20 +103,6 @@ inherited ClienteView: TClienteView
     MaxLength = 100
     TabOrder = 3
   end
-  object EDTTelefone: TLabeledEdit
-    Left = 195
-    Top = 251
-    Width = 303
-    Height = 21
-    CharCase = ecUpperCase
-    EditLabel.Width = 53
-    EditLabel.Height = 13
-    EditLabel.Caption = 'Telefone:'
-    LabelPosition = lpLeft
-    LabelSpacing = 10
-    MaxLength = 20
-    TabOrder = 4
-  end
   object EDTEmail: TLabeledEdit
     Left = 195
     Top = 295
@@ -121,5 +116,15 @@ inherited ClienteView: TClienteView
     LabelSpacing = 10
     MaxLength = 50
     TabOrder = 5
+  end
+  object MSKTelefone: TMaskEdit
+    Left = 195
+    Top = 252
+    Width = 303
+    Height = 21
+    CharCase = ecUpperCase
+    MaxLength = 20
+    TabOrder = 4
+    Text = ''
   end
 end

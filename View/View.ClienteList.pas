@@ -23,6 +23,7 @@ type
     EDTRazaoSocial: TEdit;
     LBLRazaoSocial: TLabel;
     procedure BTNPesquisarClick(Sender: TObject);
+    procedure FDQueryAfterOpen(DataSet: TDataSet);
   private
   public
     function CreateViewTemplate(AOperacao: TOperacao): TTemplateView; override;
@@ -88,6 +89,11 @@ end;
 function TClienteListView.CreateViewTemplate(AOperacao: TOperacao): TTemplateView;
 begin
   Result := TClienteView.Create(Self);
+end;
+
+procedure TClienteListView.FDQueryAfterOpen(DataSet: TDataSet);
+begin
+  TStringField(DataSource.DataSet.FieldByName('CNPJ')).EditMask := '00\.000\.000\/0000\-00;0;_';
 end;
 
 function TClienteListView.Search(const ACondition: string): TModel;

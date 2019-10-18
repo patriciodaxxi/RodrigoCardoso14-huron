@@ -18,16 +18,22 @@ inherited ProdutoView: TProdutoView
         Text = 'Atualizado em: 14/10/2019 10:10:10'
         Width = 200
       end>
+    ExplicitTop = 338
+    ExplicitWidth = 647
   end
   inherited Panel1: TPanel
     Top = 297
     Width = 647
     TabOrder = 4
+    ExplicitTop = 297
+    ExplicitWidth = 647
     inherited BtnGravar: TBitBtn
       Left = 432
+      ExplicitLeft = 432
     end
     inherited BtnCancelar: TBitBtn
       Left = 538
+      ExplicitLeft = 538
     end
   end
   object EDTDescricao: TLabeledEdit
@@ -55,6 +61,7 @@ inherited ProdutoView: TProdutoView
     EditLabel.Caption = 'Custo:'
     LabelPosition = lpLeft
     LabelSpacing = 10
+    MaxLength = 20
     TabOrder = 1
     Text = '0.00000'
     OnExit = EDTCustoExit
@@ -71,6 +78,7 @@ inherited ProdutoView: TProdutoView
     EditLabel.Caption = 'Pre'#231'o de Venda:'
     LabelPosition = lpLeft
     LabelSpacing = 10
+    MaxLength = 20
     TabOrder = 2
     Text = '0.00000'
     OnExit = EDTPrecoVendaExit

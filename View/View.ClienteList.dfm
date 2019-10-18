@@ -1,5 +1,7 @@
 inherited ClienteListView: TClienteListView
   Caption = 'Clientes'
+  ExplicitWidth = 1131
+  ExplicitHeight = 542
   PixelsPerInch = 96
   TextHeight = 13
   inherited DBGrid: TDBGrid
@@ -26,7 +28,7 @@ inherited ClienteListView: TClienteListView
       item
         Expanded = False
         FieldName = 'CNPJ'
-        Width = 131
+        Width = 151
         Visible = True
       end
       item
@@ -136,7 +138,7 @@ inherited ClienteListView: TClienteListView
   end
   inherited ImageList1: TImageList
     Bitmap = {
-      494C010105003400B80020002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010105003400BC0020002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000800000004000000001002000000000000080
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1200,6 +1202,7 @@ inherited ClienteListView: TClienteListView
       000000000000}
   end
   inherited FDQuery: TFDQuery
+    AfterOpen = FDQueryAfterOpen
     ConnectionName = 'Huron'
     SQL.Strings = (
       'SELECT * FROM VWCLIENTE')

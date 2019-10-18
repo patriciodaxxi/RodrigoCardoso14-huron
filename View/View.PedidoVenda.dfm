@@ -47,18 +47,25 @@ inherited PedidoVendaView: TPedidoVendaView
     Caption = 'CTRL + Del - Remover Produto'
   end
   object LBLQuantidadeItensRotulo: TLabel [5]
-    Left = 416
+    Left = 494
     Top = 380
     Width = 34
     Height = 13
     Caption = 'Itens:'
   end
   object LBLQuantidadeItens: TLabel [6]
-    Left = 456
+    Left = 534
     Top = 380
     Width = 7
     Height = 13
     Caption = '0'
+  end
+  object LBLDown: TLabel [7]
+    Left = 354
+    Top = 380
+    Width = 109
+    Height = 13
+    Caption = 'Down - Gerar linha'
   end
   inherited stat1: TStatusBar
     Width = 788
@@ -77,6 +84,11 @@ inherited PedidoVendaView: TPedidoVendaView
     Width = 788
     TabOrder = 3
     ExplicitWidth = 788
+    inherited LBLID: TLabel
+      Width = 9
+      Caption = '0'
+      ExplicitWidth = 9
+    end
     inherited BtnGravar: TBitBtn
       Left = 573
       ExplicitLeft = 573
@@ -111,7 +123,7 @@ inherited PedidoVendaView: TPedidoVendaView
     DrawingStyle = gdsClassic
     FixedColor = clAppWorkSpace
     FixedCols = 0
-    Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goTabs]
+    Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goColSizing, goTabs]
     ParentCtl3D = False
     TabOrder = 2
     OnDrawCell = SGPedidoVendaItensDrawCell

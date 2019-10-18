@@ -225,11 +225,13 @@ begin
     WindowState := wsNormal;
     BloquearRedimensionamento(Self);
     BorderIcons := BorderIcons + [biSystemMenu] + [biMinimize] - [biMaximize];
+    StatusBar.Panels.Items[0].Text := 'RETURN - Selecionar registro';
     if DBGrid.CanFocus then
       DBGrid.SetFocus;
   end
   else
   begin
+    StatusBar.Panels.Items[0].Text := 'RETURN - Tecle na tabela para visualizar os dados do registro';
     WindowState := wsMaximized;
   end;
 end;
