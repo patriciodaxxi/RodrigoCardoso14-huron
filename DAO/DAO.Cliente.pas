@@ -60,11 +60,11 @@ begin
   SB := TStringBuilder.Create;
   try
     SB.Append('UPDATE OR INSERT INTO Cliente ( ').
-         Append('ID, RazaoSocial, NomeFantasia, ').
-         Append('CNPJ, Endereco, Telefone, Email) ').
+         Append('ID, RazaoSocial, NomeFantasia, CNPJ, ').
+         Append('Endereco, Telefone, Email, UpdatedAt) ').
        Append('VALUES( ').
-         Append(':ID, :RazaoSocial, :NomeFantasia, ').
-         Append(':CNPJ, :Endereco, :Telefone, :Email) ').
+         Append(':ID, :RazaoSocial, :NomeFantasia, :CNPJ, ').
+         Append(':Endereco, :Telefone, :Email, CURRENT_TIMESTAMP) ').
        Append('MATCHING (ID) RETURNING ID');
     Result := SB.ToString;
   finally

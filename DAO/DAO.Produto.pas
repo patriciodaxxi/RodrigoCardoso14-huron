@@ -55,10 +55,10 @@ begin
   try
     SB.Append('UPDATE OR INSERT INTO Produto ( ').
          Append('ID, Descricao, Custo, ').
-         Append('PrecoVenda) ').
+         Append('PrecoVenda, UpdatedAt) ').
        Append('VALUES( ').
          Append(':ID, :Descricao, :Custo, ').
-         Append(':PrecoVenda) ').
+         Append(':PrecoVenda, CURRENT_TIMESTAMP) ').
        Append('MATCHING (ID) RETURNING ID');
     Result := SB.ToString;
   finally

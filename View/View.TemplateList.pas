@@ -204,8 +204,6 @@ end;
 
 procedure TTemplateListView.FormDestroy(Sender: TObject);
 begin
-  if Assigned(DataSource.DataSet) then
-    DataSource.DataSet := nil;
   if Assigned(Controller) then
     FreeAndNil(FController);
 end;
@@ -225,6 +223,7 @@ begin
     Width := 500;
     Height := 800;
     WindowState := wsNormal;
+    BloquearRedimensionamento(Self);
     BorderIcons := BorderIcons + [biSystemMenu] + [biMinimize] - [biMaximize];
     if DBGrid.CanFocus then
       DBGrid.SetFocus;

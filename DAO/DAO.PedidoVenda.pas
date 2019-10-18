@@ -16,7 +16,8 @@ type
 implementation
 
 uses
-  Model.PedidoVenda, Model.Cliente, DAO.Cliente;
+  Model.PedidoVenda, Model.Cliente, DAO.Cliente, DAO.PedidoVendaItem,
+  Generics.Collections, Model.Item;
 
 { TPedidoVenda }
 
@@ -28,17 +29,21 @@ end;
 function TPedidoVendaDAO.SetModelByDataSet(AFDQuery: TFDQuery): TModel;
 var
   LClienteDAO: TClienteDAO;
+  LPedidoVendaItemDAO: TPedidoVendaItemDAO;
 begin
   Result := inherited;
   LClienteDAO := TClienteDAO.Create;
+  LPedidoVendaItemDAO := TPedidoVendaItemDAO.Create;
   try
     with TPedidoVenda(Result), AFDQuery do
     begin
       Cliente := TCliente(LClienteDAO.Find(FieldByName('IDCliente').AsInteger));
       ValorTotal := FieldByName('ValorTotal').AsFloat;
+      ListItem := TObjectList<TItem>(LPedidoVendaItemDAO.Find('IDPedidoVenda = ' + Result.ID.ToString));
     end;
   finally
     FreeAndNil(LClienteDAO);
+    FreeAndNil(LPedidoVendaItemDAO);
   end;
 end;
 
@@ -59,9 +64,9 @@ begin
   SB := TStringBuilder.Create;
   try
     SB.Append('UPDATE OR INSERT INTO PedidoVenda ( ').
-         Append('ID, IDCliente, ValorTotal) ').
+         Append('ID, IDCliente, ValorTotal, UpdatedAt) ').
        Append('VALUES( ').
-         Append(':ID, :IDCliente, :ValorTotal) ').
+         Append(':ID, :IDCliente, :ValorTotal, CURRENT_TIMESTAMP) ').
        Append('MATCHING (ID) RETURNING ID');
     Result := SB.ToString;
   finally

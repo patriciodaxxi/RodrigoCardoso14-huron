@@ -106,9 +106,8 @@ begin
     LMensagem := 'Informe a Descrição';
     EDTDescricao.SetFocus;
     Result := False;
-  end;
-
-  if not LMensagem.Trim.IsEmpty then
+  end
+  else if not LMensagem.Trim.IsEmpty then
   begin
     Application.MessageBox(PWideChar(LMensagem), 'Atenção', MB_OK + MB_ICONWARNING);
   end;

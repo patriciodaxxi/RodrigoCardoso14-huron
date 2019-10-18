@@ -1,13 +1,38 @@
 inherited ProdutoView: TProdutoView
-  Caption = 'ProdutoView'
+  Caption = 'Produto'
+  ClientHeight = 366
+  ClientWidth = 647
+  ExplicitWidth = 663
+  ExplicitHeight = 405
   PixelsPerInch = 96
   TextHeight = 13
+  inherited stat1: TStatusBar
+    Top = 338
+    Width = 647
+    Panels = <
+      item
+        Text = 'Criado em: 14/10/2019 10:10:10'
+        Width = 200
+      end
+      item
+        Text = 'Atualizado em: 14/10/2019 10:10:10'
+        Width = 200
+      end>
+  end
   inherited Panel1: TPanel
+    Top = 297
+    Width = 647
     TabOrder = 4
+    inherited BtnGravar: TBitBtn
+      Left = 432
+    end
+    inherited BtnCancelar: TBitBtn
+      Left = 538
+    end
   end
   object EDTDescricao: TLabeledEdit
     Left = 158
-    Top = 144
+    Top = 100
     Width = 409
     Height = 21
     CharCase = ecUpperCase
@@ -21,7 +46,7 @@ inherited ProdutoView: TProdutoView
   end
   object EDTCusto: TLabeledEdit
     Left = 158
-    Top = 194
+    Top = 150
     Width = 121
     Height = 21
     Alignment = taRightJustify
@@ -37,7 +62,7 @@ inherited ProdutoView: TProdutoView
   end
   object EDTPrecoVenda: TLabeledEdit
     Left = 158
-    Top = 242
+    Top = 198
     Width = 121
     Height = 21
     Alignment = taRightJustify

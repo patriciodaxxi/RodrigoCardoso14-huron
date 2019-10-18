@@ -18,6 +18,7 @@ type
     constructor Create; override;
     destructor Destroy; override;
     function Validate: Boolean; override;
+    function Clone: TModel; override;
 
     property Descricao: string read FDescricao write SetDescricao;
     property Custo: Double read FCusto write SetCusto;
@@ -27,6 +28,17 @@ type
 implementation
 
 { TProduto }
+
+function TProduto.Clone: TModel;
+begin
+  Result := TProduto.Create;
+  Result.ID := ID;
+  Result.CreatedAt := CreatedAt;
+  Result.UpdatedAt := UpdatedAt;
+  TProduto(Result).Descricao := FDescricao;
+  TProduto(Result).Custo := FCusto;
+  TProduto(Result).PrecoVenda := FPrecoVenda;
+end;
 
 constructor TProduto.Create;
 begin

@@ -29,6 +29,7 @@ type
     constructor Create; virtual;
     destructor Destroy; override;
     function Validate: Boolean; virtual;
+    function Clone: TModel; virtual;
 
     property ID: Integer read FID write SetID;
     property CreatedAt: TDateTime read FCreatedAt write SetCreatedAt;
@@ -42,6 +43,11 @@ uses
   SysUtils;
 
 { TBaseModel }
+
+function TModel.Clone: TModel;
+begin
+  Result := nil;
+end;
 
 constructor TModel.Create;
 begin

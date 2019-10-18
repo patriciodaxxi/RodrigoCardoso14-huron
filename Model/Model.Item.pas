@@ -16,12 +16,14 @@ type
     procedure SetQuantidade(const Value: Double);
     procedure SetValorTotal(const Value: Double);
     procedure SetValorVenda(const Value: Double);
+    function GetProduto: TProduto;
   public
     constructor Create; override;
     destructor Destroy; override;
     function Validate: Boolean; override;
+    function Clone: TModel; override;
 
-    property Produto: TProduto read FProduto write SetProduto;
+    property Produto: TProduto read GetProduto write SetProduto;
     property ValorVenda: Double read FValorVenda write SetValorVenda;
     property Quantidade: Double read FQuantidade write SetQuantidade;
     property ValorTotal: Double read FValorTotal write SetValorTotal;
@@ -31,16 +33,37 @@ implementation
 
 { TItem }
 
+function TItem.Clone: TModel;
+begin
+  Result := TItem.Create;
+  Result.ID := ID;
+  Result.CreatedAt := CreatedAt;
+  Result.UpdatedAt := UpdatedAt;
+  TItem(Result).Produto := TProduto(FProduto.Clone);
+  TItem(Result).ValorVenda := FValorVenda;
+  TItem(Result).Quantidade := FQuantidade;
+  TItem(Result).ValorTotal := FValorTotal;
+end;
+
 constructor TItem.Create;
 begin
   inherited;
-  Produto := TProduto.Create;
+  DataBaseObject.Table := 'PedidoVendaItem';
+  DataBaseObject.View := 'VWPedidoVendaItem';
+  //Produto := TProduto.Create;
 end;
 
 destructor TItem.Destroy;
 begin
   FreeAndNil(FProduto);
   inherited;
+end;
+
+function TItem.GetProduto: TProduto;
+begin
+  if not Assigned(FProduto) then
+    FProduto := TProduto.Create;
+  Result := FProduto;
 end;
 
 procedure TItem.SetProduto(const Value: TProduto);

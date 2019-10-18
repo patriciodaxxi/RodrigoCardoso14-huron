@@ -28,7 +28,8 @@ uses
   View.ProdutoList in 'View\View.ProdutoList.pas' {ProdutoListView},
   View.Produto in 'View\View.Produto.pas' {ProdutoView},
   View.PedidoVendaList in 'View\View.PedidoVendaList.pas' {PedidoVendaListView},
-  View.PedidoVenda in 'View\View.PedidoVenda.pas' {PedidoVendaView};
+  View.PedidoVenda in 'View\View.PedidoVenda.pas' {PedidoVendaView},
+  DAO.PedidoVendaItem in 'DAO\DAO.PedidoVendaItem.pas';
 
 {$R *.res}
 

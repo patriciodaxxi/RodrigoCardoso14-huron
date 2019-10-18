@@ -14,6 +14,8 @@ type
     Panel1: TPanel;
     BtnGravar: TBitBtn;
     BtnCancelar: TBitBtn;
+    LBLIDRotulo: TLabel;
+    LBLID: TLabel;
     procedure BtnCancelarClick(Sender: TObject);
     procedure BtnGravarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -28,7 +30,7 @@ type
     procedure SetModel(const Value: TModel);
   public
     procedure PrepareView; virtual;
-    procedure SetViewByModel(const AModel: TModel); virtual; abstract;
+    procedure SetViewByModel(const AModel: TModel); virtual;
     procedure SetModelByView; virtual;
     procedure CreateController; virtual; abstract;
     function Validate: Boolean; virtual; abstract;
@@ -96,10 +98,13 @@ end;
 procedure TTemplateView.FormCreate(Sender: TObject);
 begin
   CreateController;
+  BloquearRedimensionamento(Self);
 end;
 
 procedure TTemplateView.FormDestroy(Sender: TObject);
 begin
+  if Assigned(FModel) then
+    FreeAndNil(FModel);
   if Assigned(FController) then
     FreeAndNil(FController);
 end;
@@ -117,6 +122,9 @@ begin
       begin
         BtnGravar.Caption := 'Gravar';
         BtnCancelar.Caption := 'Limpar';
+        LBLID.Visible := False;
+        LBLIDRotulo.Visible := False;
+        stat1.Panels.Clear;
       end;
 
     oRead:
@@ -151,13 +159,24 @@ end;
 
 procedure TTemplateView.SetModelByView;
 begin
-  if Operacao = oCreate then
-    CleanModel;
+  //if Operacao = oCreate then
+  CleanModel;
+  Model.ID := StrToInt(LBLID.Caption);
 end;
 
 procedure TTemplateView.SetOperacao(const Value: TOperacao);
 begin
   FOperacao := Value;
+end;
+
+procedure TTemplateView.SetViewByModel(const AModel: TModel);
+begin
+  if Operacao in [oUpdate, oRead] then
+  begin
+    LBLID.Caption := AModel.ID.ToString;
+    stat1.Panels.Items[0].Text := 'Criado em: ' + FormatDateTime('c', AModel.CreatedAt);
+    stat1.Panels.Items[1].Text := 'Atualizado em: ' + FormatDateTime('c', AModel.UpdatedAt);
+  end;
 end;
 
 end.

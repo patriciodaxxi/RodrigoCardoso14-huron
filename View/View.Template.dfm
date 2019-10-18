@@ -4,7 +4,7 @@ object TemplateView: TTemplateView
   BorderIcons = [biSystemMenu, biMinimize, biHelp]
   Caption = 'TemplateView'
   ClientHeight = 472
-  ClientWidth = 613
+  ClientWidth = 738
   Color = clBtnFace
   Font.Charset = ANSI_CHARSET
   Font.Color = clWindowText
@@ -20,23 +20,53 @@ object TemplateView: TTemplateView
   TextHeight = 13
   object stat1: TStatusBar
     Left = 0
-    Top = 453
-    Width = 613
-    Height = 19
-    Panels = <>
+    Top = 444
+    Width = 738
+    Height = 28
+    Panels = <
+      item
+        Text = 'Criado em: 14/10/2019 10:10:10'
+        Width = 200
+      end
+      item
+        BiDiMode = bdLeftToRight
+        ParentBiDiMode = False
+        Text = 'Atualizado em: 14/10/2019 10:10:10'
+        Width = 200
+      end>
   end
   object Panel1: TPanel
     Left = 0
-    Top = 412
-    Width = 613
+    Top = 403
+    Width = 738
     Height = 41
     Align = alBottom
     TabOrder = 1
     DesignSize = (
-      613
+      738
       41)
+    object LBLIDRotulo: TLabel
+      Left = 8
+      Top = 13
+      Width = 19
+      Height = 13
+      Caption = 'ID:'
+    end
+    object LBLID: TLabel
+      Left = 32
+      Top = 11
+      Width = 18
+      Height = 16
+      Caption = '14'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
     object BtnGravar: TBitBtn
-      Left = 398
+      Left = 523
       Top = 8
       Width = 100
       Height = 25
@@ -64,7 +94,7 @@ object TemplateView: TTemplateView
       OnClick = BtnGravarClick
     end
     object BtnCancelar: TBitBtn
-      Left = 504
+      Left = 629
       Top = 8
       Width = 100
       Height = 25

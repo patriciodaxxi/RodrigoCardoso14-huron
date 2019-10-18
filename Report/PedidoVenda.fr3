@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<TfrxReport Version="5.6.1" DotMatrixReport="False" IniFile="\Software\Fast Reports" PreviewOptions.Buttons="4095" PreviewOptions.Zoom="1" PrintOptions.Printer="Padrão" PrintOptions.PrintOnSheet="0" ReportOptions.CreateDate="43756.0507413426" ReportOptions.Description.Text="" ReportOptions.LastChange="43756.0768264583" ScriptLanguage="PascalScript" ScriptText.Text="begin&#13;&#10;&#13;&#10;end.">
+  <Datasets>
+    <item DataSet="FRXDBPedidoVenda" DataSetName="PedidoVenda"/>
+    <item DataSet="FRXDBPedidoVendaItem" DataSetName="PedidoVendaItem"/>
+  </Datasets>
+  <TfrxDataPage Name="Data" Height="1000" Left="0" Top="0" Width="1000"/>
+  <TfrxReportPage Name="Page1" PaperWidth="210" PaperHeight="297" PaperSize="9" LeftMargin="10" RightMargin="10" TopMargin="10" BottomMargin="10" ColumnWidth="0" ColumnPositions.Text="" HGuides.Text="" VGuides.Text="">
+    <TfrxMasterData Name="MasterData1" FillType="ftBrush" FillGap.Top="0" FillGap.Left="0" FillGap.Bottom="0" FillGap.Right="0" Height="22.67718" Left="0" Top="328.81911" Width="718.1107" ColumnWidth="0" ColumnGap="0" DataSet="FRXDBPedidoVenda" DataSetName="PedidoVenda" RowCount="0">
+      <TfrxMemoView Name="PedidoVendaID" Left="11.33859" Top="0" Width="79.37013" Height="18.89765" DataField="ID" DataSet="FRXDBPedidoVenda" DataSetName="PedidoVenda" Text="[PedidoVenda.&#34;ID&#34;]"/>
+      <TfrxMemoView Name="PedidoVendaIDCLIENTE" Left="109.60637" Top="0" Width="79.37013" Height="18.89765" DataField="IDCLIENTE" DataSet="FRXDBPedidoVenda" DataSetName="PedidoVenda" Text="[PedidoVenda.&#34;IDCLIENTE&#34;]"/>
+      <TfrxMemoView Name="PedidoVendaVALORTOTAL" Left="215.43321" Top="3.77953" Width="151.1812" Height="18.89765" DataField="VALORTOTAL" DataSet="FRXDBPedidoVenda" DataSetName="PedidoVenda" Text="[PedidoVenda.&#34;VALORTOTAL&#34;]"/>
+      <TfrxMemoView Name="PedidoVendaRAZAOSOCIAL" Left="430.86642" Top="0" Width="400.63018" Height="18.89765" DataField="RAZAOSOCIAL" DataSet="FRXDBPedidoVenda" DataSetName="PedidoVenda" Text="[PedidoVenda.&#34;RAZAOSOCIAL&#34;]"/>
+    </TfrxMasterData>
+    <TfrxDetailData Name="DetailData1" FillType="ftBrush" FillGap.Top="0" FillGap.Left="0" FillGap.Bottom="0" FillGap.Right="0" Height="22.67718" Left="0" Top="374.17347" Width="718.1107" ColumnWidth="0" ColumnGap="0" DataSet="FRXDBPedidoVendaItem" DataSetName="PedidoVendaItem" RowCount="0">
+      <TfrxMemoView Name="PedidoVendaItemID" Left="11.33859" Top="0" Width="79.37013" Height="18.89765" DataField="ID" DataSet="FRXDBPedidoVendaItem" DataSetName="PedidoVendaItem" Text="[PedidoVendaItem.&#34;ID&#34;]"/>
+      <TfrxMemoView Name="PedidoVendaItemIDPRODUTO" Left="113.3859" Top="3.77953" Width="79.37013" Height="18.89765" DataField="IDPRODUTO" DataSet="FRXDBPedidoVendaItem" DataSetName="PedidoVendaItem" Text="[PedidoVendaItem.&#34;IDPRODUTO&#34;]"/>
+      <TfrxMemoView Name="PedidoVendaItemDESCRICAO" Left="215.43321" Top="0" Width="400.63018" Height="18.89765" DataField="DESCRICAO" DataSet="FRXDBPedidoVendaItem" DataSetName="PedidoVendaItem" Text="[PedidoVendaItem.&#34;DESCRICAO&#34;]"/>
+      <TfrxMemoView Name="PedidoVendaItemVALORVENDA" Left="631.18151" Top="0" Width="79.37013" Height="18.89765" DataField="VALORVENDA" DataSet="FRXDBPedidoVendaItem" DataSetName="PedidoVendaItem" Text="[PedidoVendaItem.&#34;VALORVENDA&#34;]"/>
+    </TfrxDetailData>
+    <TfrxReportTitle Name="ReportTitle1" FillType="ftBrush" FillGap.Top="0" FillGap.Left="0" FillGap.Bottom="0" FillGap.Right="0" Height="41.57483" Left="0" Top="18.89765" Width="718.1107">
+      <TfrxMemoView Name="Memo1" Left="0" Top="3.77953" Width="718.11023622" Height="30.23624" Font.Charset="1" Font.Color="0" Font.Height="-27" Font.Name="Arial" Font.Style="1" HAlign="haCenter" ParentFont="False" Text="Pedido de Venda"/>
+    </TfrxReportTitle>
+    <TfrxPageHeader Name="PageHeader1" FillType="ftBrush" FillGap.Top="0" FillGap.Left="0" FillGap.Bottom="0" FillGap.Right="0" Height="185.19697" Left="0" Top="83.14966" Width="718.1107">
+      <TfrxMemoView Name="Memo2" Left="3.77953" Top="3.77953" Width="102.04684622" Height="30.23624" Font.Charset="1" Font.Color="0" Font.Height="-27" Font.Name="Arial" Font.Style="1" HAlign="haCenter" ParentFont="False" Text="Cliente:"/>
+      <TfrxMemoView Name="PedidoVendaIDCLIENTE1" Left="18.89765" Top="41.57483" Width="154.96073" Height="18.89765" AllowHTMLTags="True" DataSet="FRXDBPedidoVenda" DataSetName="PedidoVenda" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="Arial" Font.Style="0" ParentFont="False" Text="&#60;b&#62;ID: &#60;/b&#62;[PedidoVenda.&#34;IDCLIENTE&#34;]"/>
+      <TfrxMemoView Name="PedidoVendaRAZAOSOCIAL1" Left="15.11812" Top="60.47248" Width="400.63018" Height="18.89765" AllowHTMLTags="True" DataSet="FRXDBPedidoVenda" DataSetName="PedidoVenda" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="Arial" Font.Style="0" ParentFont="False" Text="&#60;b&#62;Razão Social: &#60;/b&#62;[PedidoVenda.&#34;RAZAOSOCIAL&#34;]"/>
+      <TfrxMemoView Name="PedidoVendaNOMEFANTASIA" Left="26.45671" Top="90.70872" Width="400.63018" Height="18.89765" AllowHTMLTags="True" DataSet="FRXDBPedidoVenda" DataSetName="PedidoVenda" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="Arial" Font.Style="0" ParentFont="False" Text="&#60;b&#62;Nome Fantasia: &#60;/b&#62;[PedidoVenda.&#34;NOMEFANTASIA&#34;]"/>
+      <TfrxMemoView Name="PedidoVendaCNPJ" Left="37.7953" Top="120.94496" Width="113.3859" Height="18.89765" AllowHTMLTags="True" DataSet="FRXDBPedidoVenda" DataSetName="PedidoVenda" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="Arial" Font.Style="0" ParentFont="False" Text="[FormatMaskText('00\.000\.000\/0000\-0000;0;_',&#60;PedidoVenda.&#34;CNPJ&#34;&#62;)]"/>
+      <TfrxMemoView Name="PedidoVendaENDERECO" Left="226.7718" Top="117.16543" Width="400.63018" Height="18.89765" AllowHTMLTags="True" DataSet="FRXDBPedidoVenda" DataSetName="PedidoVenda" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="Arial" Font.Style="0" ParentFont="False" Text="&#60;b&#62;Endereço: &#60;/b&#62;[PedidoVenda.&#34;ENDERECO&#34;]"/>
+      <TfrxMemoView Name="PedidoVendaTELEFONE" Left="291.02381" Top="143.62214" Width="158.74026" Height="18.89765" AllowHTMLTags="True" DataSet="FRXDBPedidoVenda" DataSetName="PedidoVenda" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="Arial" Font.Style="0" ParentFont="False" Text="&#60;b&#62;Telefone: &#60;/b&#62;[PedidoVenda.&#34;TELEFONE&#34;]"/>
+      <TfrxMemoView Name="PedidoVendaEMAIL" Left="472.44125" Top="143.62214" Width="400.63018" Height="18.89765" AllowHTMLTags="True" DataSet="FRXDBPedidoVenda" DataSetName="PedidoVenda" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="Arial" Font.Style="0" ParentFont="False" Text="&#60;b&#62;E-mail: &#60;/b&#62;[PedidoVenda.&#34;EMAIL&#34;]"/>
+    </TfrxPageHeader>
+  </TfrxReportPage>
+</TfrxReport>

@@ -15,6 +15,7 @@ type
     function VerifyObject(ACol, ARow: Integer): Boolean;
   end;
 
+procedure BloquearRedimensionamento(const AForm: TForm);
 function ValidarEMail(AEMail: string): Boolean;
 procedure LimparCampos(const AView: TForm);
 procedure HabilitarCampos(const AView: TForm; const AFlag: Boolean);
@@ -184,6 +185,14 @@ end;
 function TStringGridEventHelper.VerifyObject(ACol, ARow: Integer): Boolean;
 begin
   Result := Assigned(Self.Objects[ACol, ARow]);
+end;
+
+procedure BloquearRedimensionamento(const AForm: TForm);
+begin
+  AForm.Constraints.MaxHeight := AForm.Height;
+  AForm.Constraints.MinHeight := AForm.Height;
+  AForm.Constraints.MaxWidth := AForm.Width;
+  AForm.Constraints.MinWidth := AForm.width;
 end;
 
 end.

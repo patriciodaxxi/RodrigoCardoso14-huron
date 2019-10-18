@@ -1,20 +1,19 @@
 inherited PedidoVendaView: TPedidoVendaView
   Caption = 'Pedido de Venda'
   ClientWidth = 788
-  OnShow = FormShow
   ExplicitWidth = 804
   PixelsPerInch = 96
   TextHeight = 13
   object LBLValorTotalRotulo: TLabel [0]
-    Left = 613
-    Top = 392
+    Left = 593
+    Top = 380
     Width = 65
     Height = 13
     Caption = 'Valor Total:'
   end
   object LBLValorTotal: TLabel [1]
     Left = 741
-    Top = 391
+    Top = 376
     Width = 39
     Height = 18
     Alignment = taRightJustify
@@ -28,27 +27,50 @@ inherited PedidoVendaView: TPedidoVendaView
   end
   object LBLPesquisarCliente: TLabel [2]
     Left = 646
-    Top = 56
+    Top = 26
     Width = 125
     Height = 13
     Caption = 'F9 - Pesquisar Cliente'
   end
   object Label1: TLabel [3]
     Left = 3
-    Top = 391
+    Top = 380
     Width = 129
     Height = 13
     Caption = 'F9 - Pesquisar Produto'
   end
   object LBLRemoverProduto: TLabel [4]
     Left = 156
-    Top = 391
+    Top = 380
     Width = 179
     Height = 13
     Caption = 'CTRL + Del - Remover Produto'
   end
+  object LBLQuantidadeItensRotulo: TLabel [5]
+    Left = 416
+    Top = 380
+    Width = 34
+    Height = 13
+    Caption = 'Itens:'
+  end
+  object LBLQuantidadeItens: TLabel [6]
+    Left = 456
+    Top = 380
+    Width = 7
+    Height = 13
+    Caption = '0'
+  end
   inherited stat1: TStatusBar
     Width = 788
+    Panels = <
+      item
+        Text = 'Criado em: 14/10/2019 10:10:10'
+        Width = 200
+      end
+      item
+        Text = 'Atualizado em: 14/10/2019 10:10:10'
+        Width = 200
+      end>
     ExplicitWidth = 788
   end
   inherited Panel1: TPanel
@@ -66,7 +88,7 @@ inherited PedidoVendaView: TPedidoVendaView
   end
   object EDTCliente: TLabeledEdit
     Left = 104
-    Top = 52
+    Top = 22
     Width = 537
     Height = 21
     CharCase = ecUpperCase
@@ -80,12 +102,13 @@ inherited PedidoVendaView: TPedidoVendaView
   end
   object SGPedidoVendaItens: TStringGrid
     Left = 3
-    Top = 104
+    Top = 64
     Width = 780
-    Height = 281
+    Height = 305
     ColCount = 4
     Ctl3D = False
     DefaultRowHeight = 30
+    DrawingStyle = gdsClassic
     FixedColor = clAppWorkSpace
     FixedCols = 0
     Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goTabs]
@@ -95,5 +118,10 @@ inherited PedidoVendaView: TPedidoVendaView
     OnKeyDown = SGPedidoVendaItensKeyDown
     OnKeyPress = SGPedidoVendaItensKeyPress
     OnSetEditText = SGPedidoVendaItensSetEditText
+    ColWidths = (
+      378
+      109
+      113
+      103)
   end
 end

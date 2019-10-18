@@ -7,17 +7,20 @@ uses
   System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
   Vcl.StdCtrls, FireDAC.UI.Intf, FireDAC.VCLUI.Wait, FireDAC.Phys.FBDef,
   FireDAC.Phys, FireDAC.Phys.IBBase, FireDAC.Phys.FB, FireDAC.Stan.Intf,
-  FireDAC.Comp.UI, Vcl.ComCtrls;
+  FireDAC.Comp.UI, Vcl.ComCtrls, Vcl.Menus;
 
 type
   TPrincipalView = class(TForm)
-    BTNCliente: TButton;
-    Button1: TButton;
     StatusBar1: TStatusBar;
-    BTNPedidoVenda: TButton;
-    procedure BTNClienteClick(Sender: TObject);
-    procedure Button1Click(Sender: TObject);
-    procedure BTNPedidoVendaClick(Sender: TObject);
+    MMPrincipal: TMainMenu;
+    Cadastros1: TMenuItem;
+    MICliente: TMenuItem;
+    MIProduto: TMenuItem;
+    Movimentos1: TMenuItem;
+    MIPedidoVenda: TMenuItem;
+    procedure MIClienteClick(Sender: TObject);
+    procedure MIProdutoClick(Sender: TObject);
+    procedure MIPedidoVendaClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -34,7 +37,7 @@ uses
 
 {$R *.dfm}
 
-procedure TPrincipalView.BTNClienteClick(Sender: TObject);
+procedure TPrincipalView.MIClienteClick(Sender: TObject);
 begin
   ClienteListView := TClienteListView.Create(Self);
   try
@@ -44,7 +47,7 @@ begin
   end;
 end;
 
-procedure TPrincipalView.BTNPedidoVendaClick(Sender: TObject);
+procedure TPrincipalView.MIPedidoVendaClick(Sender: TObject);
 begin
   PedidoVendaListView := TPedidoVendaListView.Create(Self);
   try
@@ -54,7 +57,7 @@ begin
   end;
 end;
 
-procedure TPrincipalView.Button1Click(Sender: TObject);
+procedure TPrincipalView.MIProdutoClick(Sender: TObject);
 begin
   ProdutoListView := TProdutoListView.Create(Self);
   try

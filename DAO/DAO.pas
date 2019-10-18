@@ -12,12 +12,12 @@ type
     FModel: TModel;
     procedure SetModel(const Value: TModel);
     function CheckID(AID: Integer): Boolean;
-    function GenerateID: Integer;
     function GetNewID: Integer;
     procedure RefreshGenerator;
     function GetMaxID: Integer;
   public
     constructor Create; virtual;
+    destructor Destroy; override;
     function CreateModel: TModel; virtual; abstract;
     function Find(const AID: Integer): TModel; overload;
     function Find(const ACondition: string = ''): TObjectList<TModel>; overload;
@@ -28,6 +28,7 @@ type
     procedure SetParameters(var AFDQuery: TFDQuery; const AModel: TModel); virtual;
     function SetModelByDataSet(AFDQuery: TFDQuery): TModel; virtual;
 
+    function GenerateID: Integer;
     property Model: TModel read FModel write SetModel;
   end;
 
@@ -61,11 +62,16 @@ begin
   end;
 end;
 
+destructor TDAO.Destroy;
+begin
+  FreeAndNil(FModel);
+end;
+
 function TDAO.Find(const ACondition: string): TObjectList<TModel>;
 var
   FDQuery: TFDQuery;
 begin
-  Result := TObjectList<TModel>.Create;
+  Result := TObjectList<TModel>.Create(False);
   FDQuery := TFDQuery.Create(nil);
   try
     FDQuery.Connection := TConnectionSingleton.GetInstance.FDConnection;
@@ -136,6 +142,12 @@ function TDAO.SetModelByDataSet(AFDQuery: TFDQuery): TModel;
 begin
   Result := CreateModel;
   Result.ID := AFDQuery.FieldByName('ID').AsInteger;
+
+  if Assigned(AFDQuery.Fields.FindField('CreatedAt')) then
+    Result.CreatedAt := AFDQuery.FieldByName('CreatedAt').AsDateTime;
+
+  if Assigned(AFDQuery.Fields.FindField('UpdatedAt')) then
+    Result.UpdatedAt := AFDQuery.FieldByName('UpdatedAt').AsDateTime;
 end;
 
 procedure TDAO.SetParameters(var AFDQuery: TFDQuery; const AModel: TModel);
@@ -149,12 +161,6 @@ begin
     end;
     AFDQuery.ParamByName('ID').AsInteger := AModel.ID;
   end;
-
-  if Assigned(AFDQuery.FindParam('CreatedAt')) then
-    AFDQuery.ParamByName('CreatedAt').AsDateTime := AModel.CreatedAt;
-
-  if Assigned(AFDQuery.FindParam('UpdatedAt')) then
-    AFDQuery.ParamByName('UpdatedAt').AsDateTime := AModel.UpdatedAt;
 end;
 
 function TDAO.StringDelete: string;

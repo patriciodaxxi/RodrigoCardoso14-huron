@@ -10,7 +10,7 @@ uses
   FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, Vcl.Menus,
   FireDAC.Comp.DataSet, FireDAC.Comp.Client, System.ImageList, Vcl.ImgList,
   Vcl.ComCtrls, Vcl.Grids, Vcl.DBGrids, Vcl.StdCtrls, Vcl.ExtCtrls, Util.Enum,
-  View.Template, Vcl.Mask;
+  View.Template, Vcl.Mask, frxClass, frxDBSet;
 
 type
   TPedidoVendaListView = class(TTemplateListView)
@@ -20,10 +20,19 @@ type
     EDTValorTotal: TEdit;
     EDTRazaoSocial: TEdit;
     LBLRazaoSocial: TLabel;
+    MIImprimir: TMenuItem;
+    BTNImprimir: TButton;
+    FRXPedidoVenda: TfrxReport;
+    FRXDBPedidoVenda: TfrxDBDataset;
+    FDPedidoVenda: TFDQuery;
+    DBGrid1: TDBGrid;
+    FDPedidoVendaItem: TFDQuery;
+    FRXDBPedidoVendaItem: TfrxDBDataset;
     procedure BTNPesquisarClick(Sender: TObject);
     procedure DataSourceDataChange(Sender: TObject; Field: TField);
     procedure EDTValorTotalKeyPress(Sender: TObject; var Key: Char);
     procedure EDTValorTotalExit(Sender: TObject);
+    procedure BTNImprimirClick(Sender: TObject);
   private
   public
     function CreateViewTemplate(AOperacao: TOperacao): TTemplateView; override;
@@ -39,6 +48,35 @@ uses
   Controller.PedidoVenda, View.PedidoVenda, Util.View;
 
 {$R *.dfm}
+
+procedure TPedidoVendaListView.BTNImprimirClick(Sender: TObject);
+begin
+  inherited;
+  try
+
+
+  if (DataSource.DataSet.Active) and (not DataSource.DataSet.IsEmpty) then
+  begin
+    FDPedidoVenda.Close;
+    FDPedidoVenda.SQL.Text := 'SELECT * FROM VWPedidoVendaPrint WHERE ID = :ID; ';
+    FDPedidoVenda.ParamByName('ID').AsInteger := FDQuery.FieldByName('ID').AsInteger;
+    FDPedidoVenda.Open;
+
+    FDPedidoVendaItem.Close;
+    FDPedidoVendaItem.SQL.Text := 'SELECT * FROM VWPedidoVendaItem WHERE IDPedidoVenda = :ID; ';
+    FDPedidoVendaItem.ParamByName('ID').AsInteger := FDQuery.FieldByName('ID').AsInteger;
+    FDPedidoVendaItem.Open;
+
+    // Imprimir
+
+  end;
+  except
+    on E: Exception do
+    begin
+      Application.MessageBox(PWideChar('Erro ao Imprimir Pedido de Venda. Erro: ' + E.Message), 'Erro', MB_OK + MB_ICONERROR);
+    end;
+  end;
+end;
 
 procedure TPedidoVendaListView.BTNPesquisarClick(Sender: TObject);
 var
