@@ -1,5 +1,5 @@
 # Huron
-**<h1>Sistema de pedidos de venda</h1>**
+**<h1>Sistema de Pedidos de Venda</h1>**
 **Tecnologias:** 
 <ul>
   <li>Delphi</li>
